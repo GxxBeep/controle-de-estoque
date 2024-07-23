@@ -1,0 +1,47 @@
+
+body{
+    background-color: #dddddd;
+}
+
+form{
+    width: 200px;
+    height: auto;
+    padding: 48px 32px 32px 32px;
+    background-color: white;
+
+    border-radius: 14px;
+    box-shadow: #cccccc 0 0 10px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    font-size: larger;
+    padding: 0 0 0 2px;
+}
+
+input{
+    margin: 1px 0 10px 0;
+    font-size: medium;
+}
+
+#email, #password{
+    border-radius: 8px;
+    outline: none;
+}
+
+#password::placeholder{
+    color: #94a3b8;
+}
+
+a{
+    text-align: center;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 97vh;
+}
