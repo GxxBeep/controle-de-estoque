@@ -17,10 +17,10 @@ div {
     grid-template-rows: auto 0.85fr auto;
     grid-template-columns: 0.075fr auto;
     gap: 10px;
-    
     padding: 5px;
 }
 
+/* =========| Header |========= */
 .header {
     grid-area: header;
 
@@ -30,11 +30,13 @@ div {
 
 .header-logo {
     width: 15vw;
+    height: 3.2vw;
     margin-left: 5%;
 }
 
 .header-perfil {
     width: 10vw;
+    height: 3.2vw;
     margin-right: 3%;
 }
 
@@ -45,6 +47,24 @@ div {
     align-items: center;
 }
 
-.main, .menu-nav{
+
+/* =========| Menu Lateral |========= */
+
+
+
+
+/* =========| Painel/Output |========= */
+
+.painel {
+    display: grid;
+    gap: 10px;
+}
+
+.output-data {
+    height: 12px;
+}
+
+
+.output-data, .menu-nav{
     height: 91vh;
 }
