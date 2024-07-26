@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="/static/css/style.css">
     <script src="/static/javascript/script.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
     <link rel="icon" type="image/x-icon" href="/static/img/favicon.png">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
-    
     <title>Controle de Estoque</title>
 </head>
 <body>
     <div class="container">
-
         <!----- Header | Cabeçalho ----->
         <div class="header">
             <div class="header-logo">
@@ -29,10 +25,11 @@
         </div>
         <!------------------------------>
 
-        <!----- Nav Bat | Menu de Opções ----->
+        <!----- Nav Menu | Menu de Opções ----->
         <nav class="menu-nav">
+            <!-- Cadastro de produtos -->
             <li class="op-cadastro-produto">
-                <a href="menu-nav/cadastro.html">
+                <a href="/cadastrar-produto">
                     <div class="op-icon">
                         <i class='bx bx-folder-plus'></i>
                     </div>
@@ -41,8 +38,10 @@
                     </div>
                 </a>
             </li>
+
+            <!-- Edita informações do produto -->
             <li class="op-editor-produto">
-                <a href="#">
+                <a href="/editar-produto">
                     <div class="op-icon">
                         <i class='bx bxs-edit'></i>
                     </div>
@@ -51,8 +50,10 @@
                     </div>
                 </a>
             </li>
+
+            <!-- REmove um produto da DataBase -->
             <li class="op-remover-produto">
-                <a href="#">
+                <a href="/remover-produto">
                     <div class="op-icon">
                         <i class='bx bx-folder-minus'></i>
                     </div>
@@ -61,8 +62,10 @@
                     </div>
                 </a>
             </li>
+
+            <!-- Listara todos os produtos da DataBase -->
             <li class="op-list-produto">
-                <a href="#">
+                <a href="/listar-produtos">
                     <div class="op-icon">
                         <i class='bx bx-list-plus'></i>
                     </div>
@@ -71,8 +74,10 @@
                     </div>
                 </a>
             </li>
+
+            <!-- Exibe toda a informação do produto -->
             <li class="op-info-produto">
-                <a href="#">
+                <a href="/info-produto">
                     <div class="op-icon">
                         <i class='bx bx-info-circle'></i>
                     </div>
@@ -83,17 +88,16 @@
             </li>
         </nav>
         <!---------------------------------->
-
-        <!-- Painel de Controle
+        
+        <!----- Painel de Controle ----->
         <div class="painel">
+            <!--
             <div class="painel-control">Teste</div>
             <div class="output-data">Dados</div>
+            -->
+            {% block conteudo %}{% endblock %}
         </div>
-        -->
-
-        {% block conteudo %}
-        {% endblock %}
-        
+        <!---------------------------------->
     </div>
 </body>
 </html>
