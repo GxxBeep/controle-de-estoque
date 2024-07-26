@@ -1,0 +1,39 @@
+
+<!--
+Arquivo criado apenas para realizar um output
+Informando que a funções/opções que deseja acessa
+Esta em manutenção/contrução
+-->
+
+{% extends 'index.html' %}
+
+{% block conteudo %}
+
+<section class="section-cadastro">
+    <div class="div-cadastro-manutencao">
+        <h1 class="section-manutencao-title">{{ title }}</h1>
+        <h3 class="section-context-cadastro">{{ className }}</h3>
+        <p class="section-context-cadastro">{{ description }}</p>
+    </div>
+</section>
+
+<style>
+    .section-cadastro {
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(5px);
+    }
+
+    .div-cadastro-manutencao {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .section-context-cadastro { margin: 0; }
+    .section-context-cadastro, .section-manutencao-title { color: white; }
+</style>
+
+{% endblock %}
