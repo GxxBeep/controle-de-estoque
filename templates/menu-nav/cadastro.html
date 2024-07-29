@@ -1,0 +1,119 @@
+{% extends 'index.html' %}
+
+{% block conteudo %}
+<link rel="stylesheet" href="../static/css/menu-cadastro.css">
+
+<section>
+    <h1 class="cadastroTitulo">Cadastar Produto</h1>
+    <form class="cadastroProduto-1 form-info" id="cp1fi" autocomplete="on" method="POST" enctype="multipart/form-data">
+        <!-- TODO: enctype - verificar como as fotos são criptografadas utilizando esse metodo  -->
+        
+        <!-- CADASTRO PRODUTO 1 -->
+        <div id="cadastroProduto-1">
+            <!-- INFORMAR NOME DO PRODUTO -->
+            <div class="cadastroProduto-1 form-info produto">
+                <label for="produtoNome">Nome do Produto</label>
+                <br>
+                <input id="cadastroProduto-name" type="text" name="produtoNome" placeholder="Exemplo.: Camisa branca tamanho G HIGH" required>
+                <br>
+            </div>
+            <!------------   FIM   ------------>        
+
+            <!-- SELEÇÃO DE CATEGORIA -->
+            <div class="cadastroProduto-1 form-info categoria">
+                <label for="categoria">Categoria</label>
+
+                <select id="cadastroProduto-categoria" name="categoria" class="cadastroProduto-1 form-info categoria" required>
+                    {% for c in categoria %}
+                        <option value="{{ c }}">{{ c }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!------------   FIM   ------------>
+
+            <!-- SELEÇÃO DE PÚBLICO -->
+            <div class="cadastroProduto-1 form-info publico">
+                <div>
+                    <input type="radio" name="publico" id="cadastroProduto-publico">
+                    <label for="cadastroProduto-publico" name="masculino">Masculino</label>
+                </div>
+                <div>
+                    <input type="radio" name="publico" id="cadastroProduto-publico">
+                    <label for="cadastroProduto-publico" name="feminino">Feminino</label>
+                </div>
+            </div>
+            <!------------   FIM   ------------>
+
+            <!-- INFORMAR SALDO DE ENTRADA DO PRODUTO -->
+            <div class="cadastroProduto-1 form-info saldo">
+                <label for="saldoentrada">Saldo de Entrada</label>
+                <br>
+                <input id="cadastroProduto-saldo" type="number" name="saldoentrada" placeholder="Exemplo.: 100" required>
+                <br>
+            </div>
+            <!------------   FIM   ------------>
+
+            <!-- INFORMAR TAMANHO DA PEÇA -->
+            <div class="cadastroProduto-1 form-info tamanho">
+                <label for="tamanhopeca">Tamanho</label>
+                <input type="text" name="tamanhopeca" id="tamanhoProduto" required>
+            </div>
+            <!------------   FIM   ------------>
+
+            <!-- INFORMAR DESCRIÇÃO -->
+            <div  class="cadastroProduto-1 form-info descricao">
+                <label for="descricao">Descrição</label>
+                <input type="text" name="descricao" id="descricaoProduto">
+            </div>
+            <!------------   FIM   ------------>
+        </div>
+        <!------------   FIM   ------------> 
+   
+        <!-- CADASTRO PRODUTO 2 -->
+        <div id="cadastroProduto-2">
+            
+            <!-- INFORMAR CÓDIGO DE BARRAS -->
+            <div class="cadastroProduto-2 form-info codigoBarra">
+                <label for="codigoBarra">Código de Barras</label>
+                <input type="number" name="codigoBarra" id="codigoBarra">
+            </div>
+            <!------------   FIM   ------------> 
+
+            <!-- INFORMAR FORNECEDOR -->
+            <div class="cadastroProduto-2 form-info fornecedor">
+                <label for="fornecedor">Fornecedor</label>
+                <input type="text" name="fornecedor" id="fornecedor">
+            </div>
+            <!------------   FIM   ------------> 
+
+            <!-- INFORMAR PREÇO DO FORNECEDOR-->
+            <div class="cadastroProduto-2 form-info precoFornecedor">
+                <label for="precoFornecedor">Preço do fornecedor</label>
+                <input type="number" name="precoFornecedor" id="precoFornecedor">
+            </div>
+            <!------------   FIM   ------------> 
+
+            <!-- INFORMAR PREÇO DE VENDA -->
+            <div class="cadastroProduto-2 form-info precoVenda">
+                <label for="precoVenda">Preço de venda</label>
+                <input type="number" name="precoVenda" id="precoVenda">
+            </div>
+            <!------------   FIM   ------------> 
+        </div>
+        <!------------   FIM   ------------> 
+        
+        <!-- CADASTRO PRODUTO 3 -->
+        <div id="cadastroProduto-3">
+            <div>
+                <label for="image">Selecione as imagens:</label>
+                <input type="file" id="" name="image" accept="image/*">
+            </div>
+        </div>
+        <!------------   FIM   ------------>  
+        
+        <!-- SUBMETER -->
+        <input type="submit" value="enviar">
+        <!------------   FIM   ------------>
+    </form>
+</section>
+{% endblock %}
