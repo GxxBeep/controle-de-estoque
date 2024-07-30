@@ -5,64 +5,67 @@
 
 <section>
     <h1 class="cadastroTitulo">Cadastar Produto</h1>
-    <form class="cadastroProduto-1 form-info" id="cp1fi" autocomplete="on" method="POST" enctype="multipart/form-data">
+    <form class="cadastroProduto form-info" id="cp1fi" autocomplete="on" method="POST" enctype="multipart/form-data">
         <!-- TODO: enctype - verificar como as fotos são criptografadas utilizando esse metodo  -->
         
         <!-- CADASTRO PRODUTO 1 -->
         <div id="cadastroProduto-1">
             <!-- INFORMAR NOME DO PRODUTO -->
             <div class="cadastroProduto-1 form-info produto">
-                <label for="produtoNome">Nome do Produto</label>
-                <br>
-                <input id="cadastroProduto-name" type="text" name="produtoNome" placeholder="Exemplo.: Camisa branca tamanho G HIGH" required>
-                <br>
+                <label for="cadastroProduto-name">Nome do Produto</label>
+                <input id="cadastroProduto-name" type="text" name="produtoNome" placeholder="Ex.: Camisa branca tamanho G HIGH" required>
             </div>
             <!------------   FIM   ------------>        
 
             <!-- SELEÇÃO DE CATEGORIA -->
             <div class="cadastroProduto-1 form-info categoria">
-                <label for="categoria">Categoria</label>
-
-                <select id="cadastroProduto-categoria" name="categoria" class="cadastroProduto-1 form-info categoria" required>
-                    {% for c in categoria %}
-                        <option value="{{ c }}">{{ c }}</option>
-                    {% endfor %}
-                </select>
+                <fieldset>
+                    <legend>Categoria</legend>
+                    <select id="cadastroProduto-categoria" name="categoria" class="cadastroProduto-1 form-info categoria" required>
+                        {% for c in categoria %}
+                            <option value="{{ c }}">{{ c }}</option>
+                        {% endfor %}
+                    </select>
+                </fieldset>
+                <!-- <label for="categoria">Categoria</label> -->
             </div>
             <!------------   FIM   ------------>
 
             <!-- SELEÇÃO DE PÚBLICO -->
             <div class="cadastroProduto-1 form-info publico">
-                <div>
-                    <input type="radio" name="publico" id="cadastroProduto-publico">
-                    <label for="cadastroProduto-publico" name="masculino">Masculino</label>
-                </div>
-                <div>
-                    <input type="radio" name="publico" id="cadastroProduto-publico">
-                    <label for="cadastroProduto-publico" name="feminino">Feminino</label>
-                </div>
+                <fieldset>
+                    <legend>Selecione o Público</legend>
+                    <div>
+                        <input type="radio" name="publico" id="cadastroProduto-publico-mas">
+                        <label for="cadastroProduto-publico-mas" name="masculino">Masculino</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="publico" id="cadastroProduto-publico-fem">
+                        <label for="cadastroProduto-publico-fem" name="feminino">Feminino</label>
+                    </div>
+                </fieldset>
             </div>
             <!------------   FIM   ------------>
 
             <!-- INFORMAR SALDO DE ENTRADA DO PRODUTO -->
             <div class="cadastroProduto-1 form-info saldo">
-                <label for="saldoentrada">Saldo de Entrada</label>
+                <label for="cadastroProduto-saldo">Saldo de Entrada</label>
                 <br>
-                <input id="cadastroProduto-saldo" type="number" name="saldoentrada" placeholder="Exemplo.: 100" required>
+                <input id="cadastroProduto-saldo" type="number" name="saldoentrada" placeholder="Ex.: 100" required>
                 <br>
             </div>
             <!------------   FIM   ------------>
 
             <!-- INFORMAR TAMANHO DA PEÇA -->
             <div class="cadastroProduto-1 form-info tamanho">
-                <label for="tamanhopeca">Tamanho</label>
-                <input type="text" name="tamanhopeca" id="tamanhoProduto" required>
+                <label for="tamanhoProduto">Tamanho</label>
+                <input type="text" name="tamanhopeca" id="tamanhoProduto" placeholder="Ex.: G" required>
             </div>
             <!------------   FIM   ------------>
 
             <!-- INFORMAR DESCRIÇÃO -->
             <div  class="cadastroProduto-1 form-info descricao">
-                <label for="descricao">Descrição</label>
+                <label for="descricaoProduto">Descrição</label>
                 <input type="text" name="descricao" id="descricaoProduto">
             </div>
             <!------------   FIM   ------------>
@@ -75,28 +78,28 @@
             <!-- INFORMAR CÓDIGO DE BARRAS -->
             <div class="cadastroProduto-2 form-info codigoBarra">
                 <label for="codigoBarra">Código de Barras</label>
-                <input type="number" name="codigoBarra" id="codigoBarra">
+                <input type="number" name="codigoBarra" id="codigoBarra" placeholder="Ex.: 7891024117606 (Apenas números)">
             </div>
             <!------------   FIM   ------------> 
 
             <!-- INFORMAR FORNECEDOR -->
             <div class="cadastroProduto-2 form-info fornecedor">
                 <label for="fornecedor">Fornecedor</label>
-                <input type="text" name="fornecedor" id="fornecedor">
+                <input type="text" name="fornecedor" id="fornecedor" placeholder="Ex.: HIGH">
             </div>
             <!------------   FIM   ------------> 
 
             <!-- INFORMAR PREÇO DO FORNECEDOR-->
             <div class="cadastroProduto-2 form-info precoFornecedor">
-                <label for="precoFornecedor">Preço do fornecedor</label>
-                <input type="number" name="precoFornecedor" id="precoFornecedor">
+                <label for="precoFornecedor">Preço do fornecedor (R$)</label>
+                <input type="number" name="precoFornecedor" id="precoFornecedor" placeholder="Informe o preço do fornecedor">
             </div>
             <!------------   FIM   ------------> 
 
             <!-- INFORMAR PREÇO DE VENDA -->
             <div class="cadastroProduto-2 form-info precoVenda">
-                <label for="precoVenda">Preço de venda</label>
-                <input type="number" name="precoVenda" id="precoVenda">
+                <label for="precoVenda">Preço de venda (R$)</label>
+                <input type="number" name="precoVenda" id="precoVenda" placeholder="Informe o valor de venda">
             </div>
             <!------------   FIM   ------------> 
         </div>
@@ -104,15 +107,24 @@
         
         <!-- CADASTRO PRODUTO 3 -->
         <div id="cadastroProduto-3">
-            <div>
-                <label for="image">Selecione as imagens:</label>
-                <input type="file" id="" name="image" accept="image/*">
-            </div>
+            <fieldset>
+                <legend>Importa Imagens</legend>
+                <div id="cadastroOutputImagens">
+                    <img alt="">
+                    <img src="/static/img/image.jpg" alt="">
+                    <img src="/static/img/image.jpg" alt="">
+                    <img src="/static/img/image.jpg" alt="">
+                    <img src="/static/img/image.jpg" alt="">
+                    <img src="/static/img/image.jpg" alt="">
+                </div>
+                <input type="file" id="cadastroBntimage" name="image" multiple accept="png,jpg,jpeg,gif,webp">
+                <button type="button" onclick="document.getElementById('cadastroBntimage').click()">Selecionar Imagens</button>
+            </fieldset>
         </div>
         <!------------   FIM   ------------>  
         
         <!-- SUBMETER -->
-        <input type="submit" value="enviar">
+        <input class="submit" type="submit" value="Enviar">
         <!------------   FIM   ------------>
     </form>
 </section>
