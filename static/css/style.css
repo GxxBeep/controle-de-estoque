@@ -76,11 +76,28 @@ body {
 }
 
 .header-logo,
-.header-perfil {
+.header-perfil,
+.icon-menu-hidden {
   /* Apenas marcações depois remover */
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.icon-menu-hidden{
+  font-size: 1.5rem;
+  padding: 0 6px;
+
+  i{
+    padding: 4px;
+    border-radius: 8px;
+
+    &:hover{
+      background-color: rgba(155, 155, 155, 0.1);
+    }
+  }
+
+
 }
 
 /* =========| Menu Lateral |========= */
@@ -101,11 +118,11 @@ body {
 
   position: relative;
   border-radius: 10px;
-}
 
-.menu-nav li:hover {
-  background-color: rgba(155, 155, 155, 0.1);
-  transition: 300ms;
+  &:hover {
+    background-color: rgba(155, 155, 155, 0.1);
+    transition: 300ms;
+  }
 }
 
 .menu-nav a {
