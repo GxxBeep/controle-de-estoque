@@ -104,18 +104,29 @@ def cadastrar_produto():
 #
 @app.route('/editar-produto')
 def editar_produto():
-    title = "Editar informações do Produto"
-    className = 'ClassName = "op-editor-produto"'
-    description = "Em manutenção..."
 
-    template = render_template(
-        'menu-nav/manutencao.html',
-        title=title,
-        className=className,
-        description=description
-        )
+    template = render_template('menu-nav/editor.html')
 
     return template
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #

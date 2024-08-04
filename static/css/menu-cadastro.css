@@ -281,13 +281,9 @@ form {
   padding: 10px 0;
   margin: 40px 0 20px 0;
 
-  justify-self: center;
-  align-self: center;
-
   background-color: white;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 40px;
-  box-shadow: rgba(0, 0, 0, 0.1);
   transition: ease-in-out 300ms;
 
   cursor: pointer;
