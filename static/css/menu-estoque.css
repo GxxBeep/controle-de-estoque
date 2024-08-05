@@ -1,0 +1,211 @@
+
+section {
+    color: white;
+    background: transparent;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px 30px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+section .body-filtro {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+fieldset {
+    border: solid 2px rgba(255, 255, 255, 1);
+    padding: 15px 0;
+    width: 100%;
+
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+
+    .filtro-painel {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    legend {
+        font-weight: bold;
+        padding: 0 30px 0 30px;
+        letter-spacing: 2px;
+    }
+
+    span {
+        font-size: 0.85rem;
+        letter-spacing: 0.15rem;
+    }
+
+    input {
+        text-align: center;
+        border: none;
+        border-bottom: 1px solid white;
+        margin-top: 8px;
+        background: transparent;
+        font-size: 0.75rem;
+  
+        outline: none;
+        color: white;
+        letter-spacing: 1.5px;
+    }
+
+    input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+        letter-spacing: 0px;
+        font-size: 0.75rem;
+    }
+
+    select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    
+        padding: 9px 10px 0 10px;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid white;
+        text-align: center;
+        font-size: 0.75rem;
+        letter-spacing: 1.5px;
+        cursor: pointer;
+        color: white;
+        outline: none;
+        background: transparent;
+    
+        &::focus-visible {
+            outline: none;
+        }
+    }
+
+    .filtro-categoria {
+        position: relative;
+
+        option {
+            color: black;
+        }
+    }
+
+    .filtro-categoria::before,
+    .filtro-categoria::after {
+        --size: 0.3rem;
+        content: "";
+        position: absolute;
+        right: 0.5rem;
+        pointer-events: none;
+    }
+
+    .filtro-categoria::before {
+        border-left: var(--size) solid transparent;
+        border-right: var(--size) solid transparent;
+        border-bottom: var(--size) solid rgb(255, 255, 255);
+        top: 65%;
+    }
+
+    .filtro-categoria::after {
+        border-left: var(--size) solid transparent;
+        border-right: var(--size) solid transparent;
+        border-top: var(--size) solid rgb(255, 255, 255);
+        top: 80%;
+    }
+
+   .filtro-publico > div:first-of-type {
+    display: flex;
+    gap: 15px;
+
+        label {
+            font-size: 0.85rem;
+            text-align: center;
+        }
+   }
+}
+
+
+
+
+
+output > div:first-of-type {
+    margin-top: 15px;
+}
+
+
+
+
+
+
+/* Tabela */
+table {
+    width: 100%;
+    border: 1px solid white;
+    border-spacing: 0px;
+    border-collapse: separate;
+    box-shadow: 0px 0px 5px 1px white;
+    overflow: hidden;
+    text-align: center;
+
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+thead {
+    background: rgb(0 0 0 / 50%);
+
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+
+
+
+th, td {
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    font-size: 0.65rem;
+}
+
+th {
+    padding: 3px 5px;
+    background: white;
+    color: black
+}
+
+tr > th:last-child {
+    border-right: none;
+}
+
+
+td {
+    background: rgb(0 0 0 / 35%);
+    font-weight: 300;
+    padding: 2px 0 2px;
+}
+
+
+
+
+
+/* REMOVE AS SETAS DOS INPUTS DO TIPO NUMBER */
+/* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
