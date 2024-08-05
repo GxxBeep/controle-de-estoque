@@ -13,15 +13,20 @@ app.config['SECRET_KEY'] = os.getenv('KEY')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
+#
+# Pendente a configuraçáo
+#
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
+#
+# Pendente a configuraçáo
+#
 @app.route('/cadastrar-produto/', methods=('GET', 'POST'))
 def cadastrar_produto():
 
@@ -63,42 +68,6 @@ def cadastrar_produto():
     return template
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #
 # Pendente a configuraçáo
 #
@@ -129,23 +98,6 @@ def editar_produto():
 
 
 
-#
-# Pendente a configuraçáo
-#
-@app.route('/remover-produto')
-def remover_produto():
-    title = "Remover um Produto"
-    className = 'ClassName = "op-remover-produto"'
-    description = "Em manutenção..."
-
-    template = render_template(
-        'menu-nav/manutencao.html',
-        title=title,
-        className=className,
-        description=description
-        )
-
-    return template
 
 
 #
@@ -153,18 +105,29 @@ def remover_produto():
 #
 @app.route('/listar-produtos')
 def listar_produtos():
-    title = "Listar todos os Produtos"
-    className = 'ClassName = "op-list-produto"'
-    description = "Em manutenção..."
 
-    template = render_template(
-        'menu-nav/manutencao.html',
-        title=title,
-        className=className,
-        description=description
-        )
+    template = render_template('menu-nav/list-product.html')
 
     return template
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #
@@ -206,4 +169,4 @@ def login():
 
 if __name__ == '__main__':
     load_dotenv()
-    app.run(debug=True, host='26.43.221.95')
+    app.run(debug=True)
