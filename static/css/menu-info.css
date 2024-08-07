@@ -1,0 +1,286 @@
+/* TODO: As cores do input Nome do Produto e do
+input Descrição estão diferentes dos demais. */
+/* TODO: Verficiar nos outros arquivos se isso 
+também está ocorrendo*/
+
+section {
+  color: white;
+  background: transparent;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px 30px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+section {
+  .infoTitulo {
+    font-size: xx-large;
+  }
+
+  form[class="infoPesquisa"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input {
+      width: 40%;
+      height: 45px;
+      text-align: center;
+      padding: 10px 0 3px 0;
+      border: none;
+      border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+      font-size: 1.2rem;
+
+      margin-top: 3px;
+      background: transparent;
+      outline: none;
+      color: white;
+      letter-spacing: 1.2px;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+        letter-spacing: 0px;
+        font-size: medium;
+      }
+    }
+
+    button {
+      width: 10%;
+      height: 45px;
+
+      margin: 20px 0 10px 40px;
+      padding: 10px 0;
+
+      background-color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 40px;
+      transition: ease-in-out 300ms;
+
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(108%);
+        -webkit-transform: scale(108%);
+        -moz-transform: scale(108%);
+        -ms-transform: scale(108%);
+        -o-transform: scale(108%);
+      }
+    }
+  }
+  
+  #cp1fi {
+    width: 100%;
+    height: auto;
+    border: solid 1px rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 40px 0 60px;
+    margin: 20px 0 10px;
+
+    display: grid;
+    grid-template-areas: "cad1 cad2 cad3";
+    grid-template-columns: 1fr 1fr 1fr;
+
+    align-items: center;
+    justify-items: center;
+  }
+
+  #infoProduto-1,
+  #infoProduto-2,
+  #infoProduto-3 {
+    width: 300px;
+    height: 100%;
+  }
+
+  .infoProduto-1 input,
+  .infoProduto-2 input,
+  .infoProduto-3 input {
+    width: 100%;
+  }
+
+  #infoProduto-1 {
+    grid-area: cad1;
+    div {
+      padding-bottom: 10px;
+    }
+
+    div:last-child {
+      padding-bottom: 0;
+    }
+
+    .produto,
+    .saldo,
+    .tamanho,
+    .descricao {
+      label {
+        font-weight: bold;
+        padding: 0 10px 0 10px;
+        letter-spacing: 0.5px;
+      }
+
+      input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+        letter-spacing: 0px;
+      }
+
+      input {
+        text-align: center;
+        padding: 10px 0 10px 0;
+        border: solid 1px rgba(255, 255, 255, 0.2);
+        border-radius: 40px;
+        margin-top: 3px;
+        background: transparent;
+
+        outline: none;
+        color: white;
+        letter-spacing: 1.2px;
+      }
+    }
+
+    .categoria fieldset {
+      position: relative;
+
+      option {
+        color: black;
+      }
+    }
+
+    .categoria select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+
+      width: 80%;
+      border: none;
+      text-align: center;
+      color: white;
+      outline: none;
+      background: transparent;
+
+      &::focus-visible {
+        outline: none;
+      }
+    }
+
+    .categoria,
+    .publico {
+      fieldset {
+        border: solid 1px rgba(255, 255, 255, 0.2);
+        border-radius: 40px;
+        padding: 5px 0;
+        width: 100%;
+      }
+
+      legend {
+        font-weight: bold;
+        padding: 0 10px 0 10px;
+        letter-spacing: 1px;
+      }
+    }
+
+    .publico {
+      input {
+        width: auto;
+      }
+
+      fieldset {
+        display: flex;
+      }
+
+      div,
+      input {
+        flex: 1;
+        text-align: center;
+      }
+
+      label {
+        font-size: small;
+        letter-spacing: 1px;
+      }
+    }
+  }
+
+  #infoProduto-2 {
+    grid-area: cad2;
+
+    div {
+      padding-bottom: 10px;
+    }
+
+    .codigoBarra,
+    .fornecedor,
+    .precoFornecedor,
+    .precoVenda {
+      label {
+        font-weight: bold;
+        padding: 0 10px 0 10px;
+        letter-spacing: 0.5px;
+      }
+
+      input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+        letter-spacing: 0px;
+      }
+
+      input {
+        background: transparent;
+        text-align: center;
+        padding: 10px 0 10px 0;
+        border: solid 1px rgba(255, 255, 255, 0.2);
+        border-radius: 40px;
+        margin-top: 3px;
+
+        outline: none;
+        color: white;
+        letter-spacing: 1.2px;
+      }
+    }
+  }
+
+  #infoProduto-3 {
+    grid-area: cad3;
+
+    legend {
+      font-weight: bold;
+      padding: 0 10px 0 10px;
+      letter-spacing: 0.5px;
+    }
+
+    fieldset {
+      height: 95%;
+
+      border: solid 1px rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 5px 0;
+    }
+
+    #infoOutputImagens {
+      height: 85%;
+
+      img {
+        width: 80px;
+        height: 80px;
+
+        background: url("/static/img/image.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+    }
+  }
+}
+
+/* REMOVE AS SETAS DOS INPUTS DO TIPO NUMBER */
+/* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
