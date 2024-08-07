@@ -1,0 +1,136 @@
+{% extends "index.html" %}
+
+{% block conteudo %}
+
+<!-- Importar css -->
+<link rel="stylesheet" href="../static/css/menu-info.css">
+
+<section class="">
+    <h1 class="infoTitulo">Informações do Produto</h1>
+    <!-- PESQUISAR INFORMAÇÕES DE PRODUTOS -->
+    <form class="infoPesquisa" action="" method="post">
+        <input type="number" id="editorInfo-idenInput" placeholder="Insina a Identificação.." required>
+        <br>
+        <button type="submit" onclick="">Buscar</button>
+    </form>
+    <fieldset class="infoProduto form-info" id="cp1fi">
+        <!-- INFORMAÇÕES - PRODUTO 1 -->
+        <div id="infoProduto-1">
+            <!-- INFORMA O NOME DO PRODUTO -->
+            <div class="infoProduto-1 form-info produto">
+                <label for="infoProduto-name">Nome do Produto</label>
+                <input id="infoProduto-name" type="text" name="produtoNome" value="{{ dictionary['titulo'] }}" disabled>
+            </div>
+            <!------------   FIM   ------------>        
+
+            <!-- INFORMAÇÕES DE CATEGORIA -->
+            <div class="cadastroProduto-1 form-info categoria">
+                <fieldset>
+                    <legend>Categoria</legend>
+                    <select id="infoProduto-categoria" name="categoria" class="infoProduto-1 form-info categoria" disabled>
+                         <option value="{{ categoria }}">{{ dictionary['categoria'] }}</option>
+                    </select>
+                </fieldset>
+            </div>
+            <!------------   FIM   ------------>
+
+            <!-- INFORMAÇÕES DE PÚBLICO -->
+            <div class="infoProduto-1 form-info publico">
+                <fieldset>
+                    <legend>Selecione o Público</legend>
+                    <div>
+                        <input type="radio" name="publico" id="infoProduto-publico-mas" 
+                        {% if (dictionary['publico'].lower() == 'masculino') %}
+                            checked="True"
+                        {% else %}
+                            disabled
+                        {% endif %}>
+                        <label for="infoProduto-publico-mas" name="masculino">Masculino</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="publico" id="infoProduto-publico-fem"
+                        {% if (dictionary['publico'].lower() == 'feminino') %}
+                            checked="True"
+                        {% else %}
+                            disabled
+                        {% endif %}>
+                        <label for="infoProduto-publico-fem" name="feminino">Feminino</label>
+                    </div>
+                </fieldset>
+            </div>
+            <!------------   FIM   ------------>
+
+            <!-- INFORMAÇÕES SALDO DE ENTRADA DO PRODUTO -->
+            <div class="infoProduto-1 form-info saldo">
+                <label for="infoProduto-saldo">Saldo de Entrada</label>
+                <br>
+                <input id="infoProduto-saldo" type="number" name="saldoentrada" value="{{ dictionary['saldo'] }}" disabled>
+                <br>
+            </div>
+            <!------------   FIM   ------------>
+
+            <!-- INFORMAÇÕES DE TAMANHO DA PEÇA -->
+            <div class="infoProduto-1 form-info tamanho">
+                <label for="tamanhoProduto">Tamanho</label>
+                <input type="text" name="tamanhopeca" id="tamanhoProduto" value="{{ dictionary['tamanho'] }}" disabled>
+            </div>
+            <!------------   FIM   ------------>
+
+            <!-- INFORMAÇÕES DE DESCRIÇÃO -->
+            <div  class="infoProduto-1 form-info descricao">
+                <label for="descricaoProduto">Descrição</label>
+                <input type="text" name="descricao" id="descricaoProduto" value="{{ dictionary['descricao'] }}" disabled>
+            </div>
+            <!------------   FIM   ------------>
+        </div>
+        <!------------   FIM   ------------> 
+   
+        <!-- INFORMAÇÕES - PRODUTO 2 -->
+        <div id="infoProduto-2">
+            
+            <!-- INFORMAÇÕES CÓDIGO DE BARRAS -->
+            <div class="infoProduto-2 form-info codigoBarra">
+                <label for="codigoBarra">Código de Barras</label>
+                <input type="number" name="codigoBarra" id="codigoBarra" value="{{ dictionary['codigo'] }}" disabled>
+            </div>
+            <!------------   FIM   ------------> 
+
+            <!-- INFORMAÇÕES DO FORNECEDOR -->
+            <div class="infoProduto-2 form-info fornecedor">
+                <label for="fornecedor">Fornecedor</label>
+                <input type="text" name="fornecedor" id="fornecedor" value="{{ dictionary['fornecedor'] }}" disabled>
+            </div>
+            <!------------   FIM   ------------> 
+
+            <!-- INFORMAÇÕES DO PREÇO DO FORNECEDOR-->
+            <div class="infoProduto-2 form-info precoFornecedor">
+                <label for="precoFornecedor">Preço do fornecedor (R$)</label>
+                <input type="number" name="precoFornecedor" id="precoFornecedor" value="{{ dictionary['precofornecedor'] }}" disabled>
+            </div>
+            <!------------   FIM   ------------> 
+
+            <!-- INFORMAÇÕES DO PREÇO DE VENDA -->
+            <div class="infoProduto-2 form-info precoVenda">
+                <label for="precoVenda">Preço de venda (R$)</label>
+                <input type="number" name="precoVenda" id="precoVenda" value="{{ dictionary['precovenda'] }}" disabled>
+            </div>
+            <!------------   FIM   ------------> 
+        </div>
+        <!------------   FIM   ------------> 
+        
+        <!-- INFORMAÇÕES - PRODUTO 3 -->
+        <div id="infoProduto-3">
+            <fieldset>
+                <legend>Importa Imagens</legend>
+                <div id="infoOutputImagens">
+                    {% for i in imagens %}
+                        <img src="{{ i }}" alt="">
+                    {% endfor %}
+                </div>
+            </fieldset>
+        </div>
+        <!------------   FIM   ------------>  
+    </fieldset>
+</section>
+
+{% endblock conteudo %}
