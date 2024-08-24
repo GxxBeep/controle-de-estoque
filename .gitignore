@@ -1,2 +1,7 @@
 .venv
 .env
+.vscode
+database/
+anot.txt
+vv.py
+funcs/__pycache__
