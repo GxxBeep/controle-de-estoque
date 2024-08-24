@@ -3,9 +3,10 @@
 {% block conteudo %}
 <link rel="stylesheet" href="../static/css/menu-cadastro.css">
 
+
 <section>
-    <h1 class="cadastroTitulo">Cadastar Produto</h1>
-    <form class="cadastroProduto form-info" id="cp1fi" autocomplete="on" method="POST" enctype="multipart/form-data">
+    <h1 class="cadastroTitulo">Cadastrar Produto</h1>
+    <form class="cadastroProduto form-info" id="cadastroForm" autocomplete="on" method="POST" enctype="multipart/form-data">
         <!-- TODO: enctype - verificar como as fotos são criptografadas utilizando esse metodo  -->
         
         <!-- CADASTRO PRODUTO 1 -->
@@ -36,11 +37,11 @@
                 <fieldset>
                     <legend>Selecione o Público</legend>
                     <div>
-                        <input type="radio" name="publico" id="cadastroProduto-publico-fem">
+                        <input type="radio" name="publico" id="cadastroProduto-publico-fem" value="feminino">
                         <label for="cadastroProduto-publico-fem" name="feminino">Feminino</label>
                     </div>
                     <div>
-                        <input type="radio" name="publico" id="cadastroProduto-publico-mas">
+                        <input type="radio" name="publico" id="cadastroProduto-publico-mas" value="masculino">
                         <label for="cadastroProduto-publico-mas" name="masculino">Masculino</label>
                     </div>
                 </fieldset>
@@ -74,58 +75,62 @@
    
         <!-- CADASTRO PRODUTO 2 -->
         <div id="cadastroProduto-2">
+
+            <!-- INFORMAR COR DO PRODUTO -->
+            <div class="cadastroProduto-2 form-info cor">
+                <label for="produtoCor">Cor</label>
+                <input type="text" name="produtoCor" id="produtoCor" placeholder="Ex.: Preta" required>
+            </div>
+            <!------------   FIM   ------------> 
             
             <!-- INFORMAR CÓDIGO DE BARRAS -->
             <div class="cadastroProduto-2 form-info codigoBarra">
                 <label for="codigoBarra">Código de Barras</label>
-                <input type="number" name="codigoBarra" id="codigoBarra" placeholder="Ex.: 7891024117606 (Apenas números)">
+                <input type="text" name="codigoBarra" id="codigoBarra" placeholder="Ex.: 7891024117606 (Apenas números)">
             </div>
             <!------------   FIM   ------------> 
 
             <!-- INFORMAR FORNECEDOR -->
             <div class="cadastroProduto-2 form-info fornecedor">
                 <label for="fornecedor">Fornecedor</label>
-                <input type="text" name="fornecedor" id="fornecedor" placeholder="Ex.: HIGH">
+                <input type="text" name="fornecedor" id="fornecedor" placeholder="Ex.: HIGH" required>
             </div>
             <!------------   FIM   ------------> 
 
             <!-- INFORMAR PREÇO DO FORNECEDOR-->
             <div class="cadastroProduto-2 form-info precoFornecedor">
                 <label for="precoFornecedor">Preço do fornecedor (R$)</label>
-                <input type="number" name="precoFornecedor" id="precoFornecedor" placeholder="Informe o preço do fornecedor">
+                <input type="number" name="precoFornecedor" id="precoFornecedor" placeholder="Informe o preço do fornecedor" required>
             </div>
             <!------------   FIM   ------------> 
 
             <!-- INFORMAR PREÇO DE VENDA -->
             <div class="cadastroProduto-2 form-info precoVenda">
                 <label for="precoVenda">Preço de venda (R$)</label>
-                <input type="number" name="precoVenda" id="precoVenda" placeholder="Informe o valor de venda">
+                <input type="number" name="precoVenda" id="precoVenda" placeholder="Informe o valor de venda" required>
             </div>
             <!------------   FIM   ------------> 
         </div>
         <!------------   FIM   ------------> 
         
         <!-- CADASTRO PRODUTO 3 -->
+         <!-- TODO: CRIAR BOTÃO PARA REMOVER IMAGENS SELECIONADAS -->
         <div id="cadastroProduto-3">
             <fieldset>
                 <legend>Importa Imagens</legend>
                 <div id="cadastroOutputImagens">
-                    <img alt="">
-                    <img src="/static/img/image.jpg" alt="">
-                    <img src="/static/img/image.jpg" alt="">
-                    <img src="/static/img/image.jpg" alt="">
-                    <img src="/static/img/image.jpg" alt="">
-                    <img src="/static/img/image.jpg" alt="">
+                    <!-- pré-visualizações das imagens aparecerão aqui -->
                 </div>
-                <input type="file" id="cadastroBntimage" name="image" multiple accept="png,jpg,jpeg,gif,webp">
-                <button type="button" onclick="document.getElementById('cadastroBntimage').click()">Selecionar Imagens</button>
+                <input type="file" id="cadastroBntImage" name="image" multiple accept=".png, .jpg, .jpeg, .gif, .webp">
+                <button type="button" onclick="document.getElementById('cadastroBntImage').click()">Selecionar Imagens</button>
             </fieldset>
         </div>
         <!------------   FIM   ------------>  
         
         <!-- SUBMETER -->
-        <input class="submit" type="submit" value="Enviar">
+        <input class="submit" type="submit" value="Cadastrar">
         <!------------   FIM   ------------>
     </form>
+    <script src="../static/javascript/cadastroProduto.js"></script>
 </section>
 {% endblock conteudo %}
