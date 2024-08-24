@@ -189,6 +189,7 @@ form {
     padding-bottom: 10px;
   }
 
+  .cor,
   .codigoBarra,
   .fornecedor,
   .precoFornecedor,
@@ -250,7 +251,7 @@ form {
     }
   }
 
-  #cadastroBntimage {
+  #cadastroBntImage {
     display: none;
   }
 
@@ -278,7 +279,7 @@ form {
   width: 320px;
   height: 45px;
 
-  padding: 10px 0;
+  font-size: 1rem;
   margin: 40px 0 20px 0;
 
   background-color: white;
