@@ -51,18 +51,12 @@ body {
     justify-content: space-between;
 }
 
-.header-logo {
-    width: 15vw;
-    margin-left: 5%;
-}
-
 .header-logo img {
     height: 100%;
 }
 
 .header-perfil {
-    padding: 0 10px;
-    margin-right: 3%;
+    margin-right: 14px;
 }
 
 .header-perfil img {
@@ -79,6 +73,7 @@ body {
 .header-perfil,
 .icon-menu-hidden {
     /* Apenas marcações depois remover */
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,7 +81,8 @@ body {
 
 .icon-menu-hidden {
     font-size: 1.5rem;
-    padding: 0 6px;
+    margin-left: 8px;
+    justify-content: start;
 
     i {
         padding: 4px;
@@ -96,6 +92,10 @@ body {
             background-color: rgba(155, 155, 155, 0.1);
         }
     }
+}
+
+.header-perfil{
+    justify-content: right;
 }
 
 /* =========| Menu Lateral |========= */
