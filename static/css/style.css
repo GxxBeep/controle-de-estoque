@@ -94,7 +94,7 @@ body {
     }
 }
 
-.header-perfil{
+.header-perfil {
     justify-content: right;
 }
 
@@ -129,46 +129,21 @@ body {
     color: white;
 }
 
-.menu-nav .op-word {
-    opacity: 0;
-    width: 0;
-    overflow: hidden;
-}
-
 .menu-nav li i {
     font-size: 1.5rem;
 }
 
 .op-word {
-    transition: opacity 50ms ease, transition 300ms ease, width 300ms ease,
-        transition 300ms ease, padding-left 300ms ease, transition 300ms ease;
-
-    -webkit-transition: opacity 50ms ease, transition 300ms ease,
-        width 300ms ease, transition 300ms ease, padding-left 300ms ease,
-        transition 300ms ease;
-    -moz-transition: opacity 50ms ease, transition 300ms ease, width 300ms ease,
-        transition 300ms ease, padding-left 300ms ease, transition 300ms ease;
-    -ms-transition: opacity 50ms ease, transition 300ms ease, width 300ms ease,
-        transition 300ms ease, padding-left 300ms ease, transition 300ms ease;
-    -o-transition: opacity 50ms ease, transition 300ms ease, width 300ms ease,
-        transition 300ms ease, padding-left 300ms ease, transition 300ms ease;
-}
-
-.menu-nav:hover .op-word {
-    opacity: 1;
     padding-left: 10px;
     width: 100px;
-    transition: opacity 1.5s ease, transition 1s ease, width 300ms ease,
-        transition 300ms ease, padding-left 300ms ease, transition 300ms ease;
-    transition-delay: 300ms;
-    -webkit-transition: opacity 1.5s ease, transition 1s ease, width 300ms ease,
-        transition 300ms ease, padding-left 300ms ease, transition 300ms ease;
-    -moz-transition: opacity 1.5s ease, transition 1s ease, width 300ms ease,
-        transition 300ms ease, padding-left 300ms ease, transition 300ms ease;
-    -ms-transition: opacity 1.5s ease, transition 1s ease, width 300ms ease,
-        transition 300ms ease, padding-left 300ms ease, transition 300ms ease;
-    -o-transition: opacity 1.5s ease, transition 1s ease, width 300ms ease,
-        transition 300ms ease, padding-left 300ms ease, transition 300ms ease;
+    transition: 300ms ease-in-out, opacity 800ms ease;
+}
+
+.op-hidden {
+    opacity: 0;
+    width: 0;
+    padding-left: 0;
+    transition: 300ms ease-in-out, opacity 50ms ease;
 }
 
 /* =========| Painel/Output |========= */
