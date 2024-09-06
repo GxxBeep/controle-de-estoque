@@ -136,14 +136,14 @@ body {
 .op-word {
     padding-left: 10px;
     width: 100px;
-    transition: 300ms ease-in-out, opacity 800ms ease;
+    transition: 300ms ease-in-out, opacity 900ms ease-in-out;
 }
 
 .op-hidden {
     opacity: 0;
     width: 0;
     padding-left: 0;
-    transition: 300ms ease-in-out, opacity 50ms ease;
+    transition: 300ms ease-in-out, opacity 50ms ease-in-out;
 }
 
 /* =========| Painel/Output |========= */
