@@ -1,25 +1,26 @@
 /* TODO: CADASTRO 3 - EXIBIR IMAGENS AO ADICIONAR,
-    E ADICIONAR DESCRIÇÃO DA IMAGEM */
+    E ADICIONAR DESCRIÇÃO DA IMAGEM 
+*/
 
 /* TODO: Criar função para redimencionar imagens no grid
     Cadastro de Protudo, ElementoID: cadastroProduto-3
     Exemplo: 
         width = (Altura / 10)
-        heigth = (Largura / 10) */
+        heigth = (Largura / 10) 
+*/
 
-/* Esconde o menu lateral. */
+/**
+ * Altera a visibilidade do menu.
+ * 
+ */
 function holdMenu() {
-    if (document.getElementsByClassName("op-hidden").length > 0) {
-        elements = document.getElementsByClassName("op-word");
-        for (let i = 0; i < elements.length; i++) {
-            elements[i].classList.remove("op-hidden");
+    const elements = document.querySelectorAll('.op-word');
+
+    elements.forEach((element) => {
+        if (elements.length > 0) {
+            element.classList.toggle('op-hidden');
         }
-    } else {
-        elements = document.getElementsByClassName("op-word");
-        for (let i = 0; i < elements.length; i++) {
-            elements[i].classList.add("op-hidden");
-        }
-    }
+    });
 }
 
 /* TODO: Adicionar funcionalidade para quando trocar de página,
