@@ -96,17 +96,17 @@ def info_produto() -> str:
     # TODO: Obter dicionário com uma função GET
     dictionary: dict[str, str] = {
         # produto 1
-        'titulo': 'Caneta Azul',
-        'categoria': 'Azul Caneta',
-        'publico': 'Feminino',
-        'saldo': '10',
-        'tamanho': 'GG',
-        'descricao': 'Um texto qualquer.',
+        'titulo': '--',
+        'categoria': '--',
+        'publico': '--',
+        'saldo': '00',
+        'tamanho': '--',
+        'descricao': '--',
         # produto 2
-        'codigo': '1234567890',
-        'fornecedor': 'Google Ltda',
-        'precofornecedor': '1000.00',
-        'precovenda': '10.00'
+        'codigo': '0000000',
+        'fornecedor': '--',
+        'precofornecedor': '00.00',
+        'precovenda': '00.00'
     }
     imagens: list[str] = []
     template: str = render_template(
