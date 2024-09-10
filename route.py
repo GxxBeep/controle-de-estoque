@@ -108,11 +108,7 @@ def info_produto() -> str:
         'precofornecedor': '1000.00',
         'precovenda': '10.00'
     }
-    imagens: list[str] = ["/static/img/image.jpg",
-                    "/static/img/image.jpg",
-                    "/static/img/image.jpg",
-                    "/static/img/image.jpg",
-                    "/static/img/image.jpg"]
+    imagens: list[str] = []
     template: str = render_template(
         'menu-nav/info.html',
         dictionary=dictionary,
