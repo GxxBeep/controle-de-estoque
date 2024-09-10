@@ -295,14 +295,19 @@ section {
         #editarOutputImagens {
             height: 85%;
 
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            gap: 4px;
+
             img {
                 width: 80px;
                 height: 80px;
 
                 background: url("/static/img/image.jpg");
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-position: center;
+                object-fit: cover;
             }
         }
 
