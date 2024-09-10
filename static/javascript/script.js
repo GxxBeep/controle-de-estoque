@@ -15,13 +15,43 @@
  */
 function holdMenu() {
     const elements = document.querySelectorAll('.op-word');
-
     elements.forEach((element) => {
         if (elements.length > 0) {
             element.classList.toggle('op-hidden');
         }
     });
+    memoryMenu();
 }
 
-/* TODO: Adicionar funcionalidade para quando trocar de página,
-não desfaça a mudança feita pela função holdMenu(). */
+
+/**
+ * Armazena um valor booleano na memória.
+ * 
+ */
+function memoryMenu() {
+    const elements = document.querySelectorAll('.op-hidden');
+    if (elements.length > 0){
+        sessionStorage.setItem('menu', false);
+    }
+    else {
+        sessionStorage.setItem('menu', true);
+    }
+}
+
+/**
+ * Inicia a classe hidden nas tags caso haja valor armazenado na memória.
+ * 
+ */
+function startMenu() {
+    let store = sessionStorage.getItem('menu');
+    if (store == 'true') {
+        const elements = document.querySelectorAll('.op-word');
+        elements.forEach((element) => {
+            if (elements.length > 0) {
+                element.classList.toggle('op-hidden');
+            }
+        });
+    }
+}
+
+startMenu();
