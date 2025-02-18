@@ -1,309 +1,291 @@
-/* TODO: ADICIONAR UMA CLASSE NA SECTION */
-
-/* SELEÇÃO PÚBLICO CONTÉM DOIS IDS REPETIDOS */
-
-/*
-section {
-  background-color: white;
-  color: black;
-
-  border-radius: 20px;
-  text-align: center;
-}
-*/
-
-section {
-  color: white;
-  background: transparent;
-  border-radius: 10px;
-  text-align: center;
-  padding: 10px 30px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+:root {
+    --color-white: #fff;
+    --color-font-input-placeholder: #c8c8c8;
+    --px-to-vw: calc(100vw / 1360);
+    --px-to-vh: calc(100vh / 639);
+    --border-bottom-value: calc(1 * var(--px-to-vw)) solid var(--color-white);
 }
 
-/*    GRID AREA    */
-form {
-  width: 100%;
-  height: 85%;
-
-  display: grid;
-  grid-template-areas:
-    "cad1 cad2 cad3"
-    "submit submit submit";
-  grid-template-columns: 1fr 1fr 1fr;
-
-  align-items: center;
-  justify-items: center;
+#cadastroForm {
+    padding: calc(8.84 * var(--px-to-vw));
+    gap: calc(20 * var(--px-to-vw));
+    display: grid;
+    grid-template-areas:
+        "p1 p2"
+        "sub sub";
+    grid-template-columns: 2fr 1fr;
+    justify-items: center;
 }
 
-/* UX */
-.cadastroTitulo {
-  padding-bottom: 20px;
-  font-size: xx-large;
+#slcOp {
+    display: flex;
+    margin-bottom: calc(35 * var(--px-to-vh));
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-#cadastroProduto-1,
-#cadastroProduto-2,
-#cadastroProduto-3 {
-  width: 300px;
-  height: 100%;
-}
-
-.cadastroProduto-1 input,
-.cadastroProduto-2 input,
-.cadastroProduto-3 input {
-  width: 100%;
-}
-
-#cadastroProduto-1 {
-  grid-area: cad1;
-  div {
-    padding-bottom: 10px;
-  }
-
-  div:last-child {
-    padding-bottom: 0;
-  }
-
-  .produto,
-  .saldo,
-  .tamanho,
-  .descricao {
-    label {
-      font-weight: bold;
-      padding: 0 10px 0 10px;
-      letter-spacing: 0.5px;
-    }
-
-    input::placeholder {
-      color: rgba(255, 255, 255, 0.4);
-      letter-spacing: 0px;
-    }
-
-    input {
-      text-align: center;
-      padding: 10px 0 10px 0;
-      border: solid 1px rgba(255, 255, 255, 0.2);
-      border-radius: 40px;
-      margin-top: 3px;
-      background: transparent;
-
-      outline: none;
-      color: white;
-      letter-spacing: 1.2px;
-    }
-  }
-
-  .categoria fieldset {
-    position: relative;
-
-    option {
-      color: black;
-    }
-  }
-  .categoria select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-
-    width: 80%;
-    border: none;
-    text-align: center;
-    cursor: pointer;
-    color: white;
-    outline: none;
-    background: transparent;
-
-    &::focus-visible {
-      outline: none;
-    }
-  }
-
-  .categoria fieldset:before,
-  .categoria fieldset:after {
-    --size: 0.3rem;
-    content: "";
-    position: absolute;
-    right: 2.5rem;
-    pointer-events: none;
-  }
-
-  .categoria fieldset::before {
-    border-left: var(--size) solid transparent;
-    border-right: var(--size) solid transparent;
-    border-bottom: var(--size) solid rgb(255, 255, 255);
-    top: 40%;
-  }
-
-  .categoria fieldset::after {
-    border-left: var(--size) solid transparent;
-    border-right: var(--size) solid transparent;
-    border-top: var(--size) solid rgb(255, 255, 255);
-    top: 55%;
-  }
-
-  .categoria,
-  .publico {
+/* ========= Categoria / Publico ========== */
+.categoria,
+.publico {
     fieldset {
-      border: solid 1px rgba(255, 255, 255, 0.2);
-      border-radius: 40px;
-      padding: 5px 0;
-      width: 100%;
-    }
+        border: none;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: calc(220* var(--px-to-vw));
+        border-bottom: var(--border-bottom-value);
+        border-radius: calc(10 * var(--px-to-vw));
+        -webkit-border-radius: calc(10 * var(--px-to-vw));
+        -moz-border-radius: calc(10 * var(--px-to-vw));
+        -ms-border-radius: calc(10 * var(--px-to-vw));
+        -o-border-radius: calc(10 * var(--px-to-vw));
+}
 
     legend {
-      font-weight: bold;
-      padding: 0 10px 0 10px;
-      letter-spacing: 1px;
+        margin-bottom: calc(5 * var(--px-to-vw));
+        font-weight: bold;
+        font-size: calc(13.6 * var(--px-to-vw));
+        letter-spacing: calc(1* var(--px-to-vw));
+        text-align: center;
     }
-  }
-
-  .publico {
-    input {
-      width: auto;
-    }
-
-    fieldset {
-      display: flex;
-    }
-
-    div,
-    input {
-      flex: 1;
-      text-align: center;
-    }
-
-    label {
-      font-size: small;
-      letter-spacing: 1px;
-    }
-  }
 }
 
-#cadastroProduto-2 {
-  grid-area: cad2;
+#cadastroProduto-categoria {
+    color: var(--color-white);
+    background: transparent;
+    border: none;
+    width: calc(220* var(--px-to-vw));
+    font-size: calc(13.6 * var(--px-to-vw));
+    text-align: center;
+}
 
-  div {
-    padding-bottom: 10px;
-  }
+#cadastroProduto-categoria:focus-visible {
+    outline: none;
+}
 
-  .cor,
-  .codigoBarra,
-  .fornecedor,
-  .precoFornecedor,
-  .precoVenda {
+.publico label {
+    font-size: calc(13.6 * var(--px-to-vw));
+}
+
+/* ========= form-info ========== */
+/* produto | tamanho | descricao | cor | codigoBarra | Fornecedor */
+.p1 {
+    grid-area: p1;
+    width: 95%;
+}
+
+.fgta {
+    display: flex;
+    align-items: center;
+    margin-bottom: calc(10 * var(--px-to-vh));
+}
+
+.fgta label {
+    font-size: calc(16 * var(--px-to-vw));
+    margin-right: calc(10 * var(--px-to-vw));
+    white-space: nowrap;
+}
+
+.fgta input {
+    font-size: calc(13.6 * var(--px-to-vw));
+    background: transparent;
+    border: none;
+    color: var(--color-font-input-placeholder);
+    border-bottom: var(--border-bottom-value);
+    width: 100%;
+}
+
+/* ========= Números de entradas ========== */
+#eleNum {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: calc(32 * var(--px-to-vh));
+}
+
+.saldo,
+.precoFornecedor,
+.precoVenda {
+    display: flex;
+    flex-direction: column;
+    gap: calc(9 * var(--px-to-vh));
+    align-items: center;
+
     label {
-      font-weight: bold;
-      padding: 0 10px 0 10px;
-      letter-spacing: 0.5px;
-    }
-
-    input::placeholder {
-      color: rgba(255, 255, 255, 0.4);
-      letter-spacing: 0px;
+        font-size: calc(16 * var(--px-to-vw));
+        text-align: center;
     }
 
     input {
-      background: transparent;
-      text-align: center;
-      padding: 10px 0 10px 0;
-      border: solid 1px rgba(255, 255, 255, 0.2);
-      border-radius: 40px;
-      margin-top: 3px;
+        font-size: calc(13.6 * var(--px-to-vw));
+        color: var(--color-font-input-placeholder);
+        background: transparent;
+        width: calc(240 * var(--px-to-vw));
+        border: none;
+        border-bottom: var(--border-bottom-value);
+        text-align: center;
+        border-radius: calc(8.84 * var(--px-to-vw));
+        -webkit-border-radius: calc(8.84 * var(--px-to-vw));
+        -moz-border-radius: calc(8.84 * var(--px-to-vw));
+        -ms-border-radius: calc(8.84 * var(--px-to-vw));
+        -o-border-radius: calc(8.84 * var(--px-to-vw));
+}
 
-      outline: none;
-      color: white;
-      letter-spacing: 1.2px;
+    input::-webkit-inner-spin-button,
+    input::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
-  }
+}
+
+/* ========= Imagem ========== */
+.p2 {
+    grid-area: p2;
+    width: 100%;
+}
+
+#cadastroBntImage {
+    display: none;
 }
 
 #cadastroProduto-3 {
-  grid-area: cad3;
+    height: 100%;
+}
 
-  legend {
+#cadastroProduto-3 fieldset {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-top: none;
+    border-bottom: none;
+    padding: calc(6.4 * var(--px-to-vh));
+    border-radius: calc(11 * var(--px-to-vw));
+    -webkit-border-radius: calc(11 * var(--px-to-vw));
+    -moz-border-radius: calc(11 * var(--px-to-vw));
+    -ms-border-radius: calc(11 * var(--px-to-vw));
+    -o-border-radius: calc(11 * var(--px-to-vw));
+}
+
+#cadastroProduto-3 legend {
     font-weight: bold;
-    padding: 0 10px 0 10px;
-    letter-spacing: 0.5px;
-  }
+    font-size: calc(13.6 * var(--px-to-vw));
+    letter-spacing: calc(1* var(--px-to-vw));
+    text-align: center;
+}
 
-  fieldset {
-    height: 95%;
-
-    border: solid 1px rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    padding: 5px 0;
-  }
-
-  #cadastroOutputImagens {
-    height: 85%;
-
-    img {
-      width: 80px;
-      height: 80px;
-
-      background: url("/static/img/image.jpg");
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-    }
-  }
-
-  #cadastroBntImage {
-    display: none;
-  }
-
-  button {
-    color: white;
-    padding: 10px 20px;
-
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    transition: ease-in-out 300ms;
-    background: none;
+#cadastroProduto-3 .selectImg {
+    color: var(--color-white);
+    font-size: calc(13.6 * var(--px-to-vw));
+    padding: calc(8.16 * var(--px-to-vw)) 0;
+    border: var(--border-bottom-value);
+    background: transparent;
     cursor: pointer;
-  }
-
-  button:hover {
-    /* border: solid 1px rgba(0, 0, 0, 0.3); */
-    transform: scale(110%);
-  }
+    border-radius: calc(8.84 * var(--px-to-vw));
+    -webkit-border-radius: calc(8.84 * var(--px-to-vw));
+    -moz-border-radius: calc(8.84 * var(--px-to-vw));
+    -ms-border-radius: calc(8.84 * var(--px-to-vw));
+    -o-border-radius: calc(8.84 * var(--px-to-vw));
+    transition: ease-in-out 300ms;
+    -webkit-transition: ease-in-out 300ms;
+    -moz-transition: ease-in-out 300ms;
+    -ms-transition: ease-in-out 300ms;
+    -o-transition: ease-in-out 300ms;
 }
 
-.submit {
-  grid-area: submit;
-
-  width: 320px;
-  height: 45px;
-
-  font-size: 1rem;
-  margin: 40px 0 20px 0;
-
-  background-color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 40px;
-  transition: ease-in-out 300ms;
-
-  cursor: pointer;
+#cadastroProduto-3 button:hover {
+    box-shadow: 0px 0px 5px 0px var(--color-white);
+    transform: scale(101%);
+    -webkit-transform: scale(101%);
+    -moz-transform: scale(101%);
+    -ms-transform: scale(101%);
+    -o-transform: scale(101%);
 }
 
-.submit:hover {
-  transform: scale(101%);
+#cadastroOutputImagens {
+    height: 100%;
+    width: 103%;
+    max-height: calc(315 * var(--px-to-vh));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: calc(5.2 * var(--px-to-vh));
+    overflow: overlay;
 }
 
-/* REMOVE AS SETAS DOS INPUTS DO TIPO NUMBER */
-/* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+#cadastroOutputImagens img {
+    width: calc(80.2 * var(--px-to-vw));
+    height: calc(80 * var(--px-to-vh));
+    /*Imagemapenasparateste,futuramenteremover*/
+    background: url("/static/img/image.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: calc(5 * var(--px-to-vw));
+    -webkit-border-radius: calc(5 * var(--px-to-vw));
+    -moz-border-radius: calc(5 * var(--px-to-vw));
+    -ms-border-radius: calc(5 * var(--px-to-vw));
+    -o-border-radius: calc(5 * var(--px-to-vw));
 }
 
-/* Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
+#cadastroForm input[type=submit] {
+    grid-area: sub;
+    width: calc(300 * var(--px-to-vw));
+    margin-top: calc(30 * var(--px-to-vh));
+    padding: calc(5 * var(--px-to-vh)) 0;
+    color: var(--color-white);
+    font-size: calc(20 * var(--px-to-vw));
+    background: transparent;
+    border: none;
+    border-bottom: calc(1 * var(--px-to-vw)) solid var(--color-white);
+    border-radius: calc(10 * var(--px-to-vw));
+    -webkit-border-radius: calc(10 * var(--px-to-vw));
+    -moz-border-radius: calc(10 * var(--px-to-vw));
+    -ms-border-radius: calc(10 * var(--px-to-vw));
+    -o-border-radius: calc(10 * var(--px-to-vw));
+    transition: ease-in-out 300ms;
+    -webkit-transition: ease-in-out 300ms;
+    -moz-transition: ease-in-out 300ms;
+    -ms-transition: ease-in-out 300ms;
+    -o-transition: ease-in-out 300ms;
 }
+
+#cadastroForm input[type=submit]:hover {
+    box-shadow: 0px 0px 5px 0px var(--color-white);
+    transform: scale(105%);
+    -webkit-transform: scale(105%);
+    -moz-transform: scale(105%);
+    -ms-transform: scale(105%);
+    -o-transform: scale(105%);
+}
+
+.p1, .p2 {
+    input:focus-visible{
+        outline: none;
+    }
+}
+
+/* ========= Botão remover ========== */
+.imgContainer {
+    display: inline-block;
+    position: relative;
+}
+
+.removeImg {
+    position: absolute;
+    top: calc(5 * var(--px-to-vh));
+    right: calc(5 * var(--px-to-vw));
+    background: #790000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+
+    font-size: calc(13 * var(--px-to-vh));
+    padding: 0 calc(5 * var(--px-to-vw));
+
+    display: none;
+}
+
+.imgContainer:hover .removeImg {
+    display: block;
+} 
