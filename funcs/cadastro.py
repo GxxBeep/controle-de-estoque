@@ -151,7 +151,7 @@ class cadastrarProduto:
             ]'
         """
         # Verifica se o formulário possui imagens
-        if self.files.getlist('imagens') is None:
+        if not self.files.getlist('imagens'):
             return None 
         else:
             # Verifica se a pasta existe
@@ -229,7 +229,7 @@ class cadastrarProduto:
     def cadastrar(self):
         # Verifica se a tabela existe
         self.__verificar_table(nome_tabela=self.name_tabela)
-        # Busca os dados
+        # Salva as imagens do formulário
         __pathList: str | None = self.salvar_imagens(name_produto=self.form['produto'])
         # Adiciona dados essenciais ao formulário
         __dadosList: list[tuple] = self.lista_dados_do_formulario(path_list=__pathList)
