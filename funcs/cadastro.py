@@ -95,7 +95,7 @@ class cadastrarProduto:
             self.db.criar_tabela(nome_tabela=nome_tabela, string_template=__tabela)
 
 
-    def verificar_repositorio(self, name: str) -> str:g
+    def verificar_repositorio(self, name: str) -> str:
         """
         Cria o repositorio de imagens caso não exista.
 
