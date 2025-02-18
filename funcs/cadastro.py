@@ -194,7 +194,7 @@ class cadastrarProduto:
         for index, value in enumerate(__values):
             # Adiciona lucro, data e hora atuais
             _y:tuple = (
-                int(x[-2]) - int(x[-3]),  # type: ignore
+                int(value[-2]) - int(value[-3]),  # type: ignore
                 datetime.now().strftime("%d/%m/%Y"),
                 datetime.now().strftime("%H:%M:%S"),
                 datetime.now().strftime("%d/%m/%Y"),
