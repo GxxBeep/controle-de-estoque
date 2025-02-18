@@ -1,7 +1,12 @@
+#PASTAS
 .venv
 .env
 .vscode
 database/
+funcs/__pycache__
+__pycache__
+
+#ARQUIVOS
+funcs/TESTES.py
 anot.txt
 vv.py
-funcs/__pycache__
