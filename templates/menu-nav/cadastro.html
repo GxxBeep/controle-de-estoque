@@ -1,136 +1,77 @@
 {% extends 'index.html' %}
 
-{% block conteudo %}
+{% block index %}
 <link rel="stylesheet" href="../static/css/menu-cadastro.css">
 
-
 <section>
-    <h1 class="cadastroTitulo">Cadastrar Produto</h1>
+    <h1 class="section-title">Cadastrar Produto</h1>
     <form class="cadastroProduto form-info" id="cadastroForm" autocomplete="on" method="POST" enctype="multipart/form-data">
-        <!-- TODO: enctype - verificar como as fotos são criptografadas utilizando esse metodo  -->
-        
-        <!-- CADASTRO PRODUTO 1 -->
-        <div id="cadastroProduto-1">
-            <!-- INFORMAR NOME DO PRODUTO -->
-            <div class="cadastroProduto-1 form-info produto">
-                <label for="cadastroProduto-name">Nome do Produto</label>
-                <input id="cadastroProduto-name" type="text" name="produtoNome" placeholder="Ex.: Camisa branca tamanho G HIGH" required>
-            </div>
-            <!------------   FIM   ------------>        
-
-            <!-- SELEÇÃO DE CATEGORIA -->
-            <div class="cadastroProduto-1 form-info categoria">
-                <fieldset>
-                    <legend>Categoria</legend>
-                    <select id="cadastroProduto-categoria" name="categoria" class="cadastroProduto-1 form-info categoria" required>
-                        {% for c in categoria %}
-                            <option value="{{ c }}">{{ c }}</option>
-                        {% endfor %}
-                    </select>
-                </fieldset>
-                <!-- <label for="categoria">Categoria</label> -->
-            </div>
-            <!------------   FIM   ------------>
-
-            <!-- SELEÇÃO DE PÚBLICO -->
-            <div class="cadastroProduto-1 form-info publico">
-                <fieldset>
-                    <legend>Selecione o Público</legend>
-                    <div>
-                        <input type="radio" name="publico" id="cadastroProduto-publico-fem" value="feminino">
-                        <label for="cadastroProduto-publico-fem" name="feminino">Feminino</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="publico" id="cadastroProduto-publico-mas" value="masculino">
-                        <label for="cadastroProduto-publico-mas" name="masculino">Masculino</label>
-                    </div>
-                </fieldset>
-            </div>
-            <!------------   FIM   ------------>
-
-            <!-- INFORMAR SALDO DE ENTRADA DO PRODUTO -->
-            <div class="cadastroProduto-1 form-info saldo">
-                <label for="cadastroProduto-saldo">Saldo de Entrada</label>
-                <br>
-                <input id="cadastroProduto-saldo" type="number" name="saldoentrada" placeholder="Ex.: 100" required>
-                <br>
-            </div>
-            <!------------   FIM   ------------>
-
-            <!-- INFORMAR TAMANHO DA PEÇA -->
-            <div class="cadastroProduto-1 form-info tamanho">
-                <label for="tamanhoProduto">Tamanho</label>
-                <input type="text" name="tamanhopeca" id="tamanhoProduto" placeholder="Ex.: G" required>
-            </div>
-            <!------------   FIM   ------------>
-
-            <!-- INFORMAR DESCRIÇÃO -->
-            <div  class="cadastroProduto-1 form-info descricao">
-                <label for="descricaoProduto">Descrição</label>
-                <input type="text" name="descricao" id="descricaoProduto" placeholder="Adicione uma descrição">
-            </div>
-            <!------------   FIM   ------------>
-        </div>
-        <!------------   FIM   ------------> 
-   
-        <!-- CADASTRO PRODUTO 2 -->
-        <div id="cadastroProduto-2">
-
-            <!-- INFORMAR COR DO PRODUTO -->
-            <div class="cadastroProduto-2 form-info cor">
-                <label for="produtoCor">Cor</label>
-                <input type="text" name="produtoCor" id="produtoCor" placeholder="Ex.: Preta" required>
-            </div>
-            <!------------   FIM   ------------> 
-            
-            <!-- INFORMAR CÓDIGO DE BARRAS -->
-            <div class="cadastroProduto-2 form-info codigoBarra">
-                <label for="codigoBarra">Código de Barras</label>
-                <input type="text" name="codigoBarra" id="codigoBarra" placeholder="Ex.: 7891024117606 (Apenas números)">
-            </div>
-            <!------------   FIM   ------------> 
-
-            <!-- INFORMAR FORNECEDOR -->
-            <div class="cadastroProduto-2 form-info fornecedor">
-                <label for="fornecedor">Fornecedor</label>
-                <input type="text" name="fornecedor" id="fornecedor" placeholder="Ex.: HIGH" required>
-            </div>
-            <!------------   FIM   ------------> 
-
-            <!-- INFORMAR PREÇO DO FORNECEDOR-->
-            <div class="cadastroProduto-2 form-info precoFornecedor">
-                <label for="precoFornecedor">Preço do fornecedor (R$)</label>
-                <input type="number" name="precoFornecedor" id="precoFornecedor" placeholder="Informe o preço do fornecedor" required>
-            </div>
-            <!------------   FIM   ------------> 
-
-            <!-- INFORMAR PREÇO DE VENDA -->
-            <div class="cadastroProduto-2 form-info precoVenda">
-                <label for="precoVenda">Preço de venda (R$)</label>
-                <input type="number" name="precoVenda" id="precoVenda" placeholder="Informe o valor de venda" required>
-            </div>
-            <!------------   FIM   ------------> 
-        </div>
-        <!------------   FIM   ------------> 
-        
-        <!-- CADASTRO PRODUTO 3 -->
-         <!-- TODO: CRIAR BOTÃO PARA REMOVER IMAGENS SELECIONADAS -->
-        <div id="cadastroProduto-3">
-            <fieldset>
-                <legend>Importa Imagens</legend>
-                <div id="cadastroOutputImagens">
-                    <!-- pré-visualizações das imagens aparecerão aqui -->
+        <div class="p1">
+            <div id="slcOp">
+                <!-- SELEÇÃO DE CATEGORIA -->
+                <div class="cadastro-produto form-info categoria">
+                    <fieldset>
+                        <legend>Categoria</legend>
+                        <select id="cadastroProduto-categoria" name="categoria" class="cadastro-produto form-info categoria" required>
+                            {% for c in categoria %}
+                                <option value="{{ c }}" style="color: #000;">{{ c }}</option>
+                            {% endfor %}
+                        </select>
+                    </fieldset>
                 </div>
-                <input type="file" id="cadastroBntImage" name="image" multiple accept=".png, .jpg, .jpeg, .gif, .webp">
-                <button type="button" onclick="document.getElementById('cadastroBntImage').click()">Selecionar Imagens</button>
-            </fieldset>
+                <!-- SELEÇÃO DE PÚBLICO -->
+                <div class="cadastro-produto form-info publico">
+                    <fieldset>
+                        <legend>Público</legend>
+                        <div>
+                            <input type="radio" name="publico" id="cadastroProduto-publico-fem" value="feminino" required>
+                            <label for="cadastroProduto-publico-fem" name="feminino">Feminino</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="publico" id="cadastroProduto-publico-mas" value="masculino" required>
+                            <label for="cadastroProduto-publico-mas" name="masculino">Masculino</label>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            {% for item in template %}
+                <div class="cadastro-produto form-info {{ item.class }} fgta">
+                    <label for="{{ item.label_for }}">{{ item.label_name }}:</label>
+                    <input 
+                    id="{{ item.input_id }}" 
+                    type="{{ item.type }}" 
+                    name="{{ item.name }}" 
+                    placeholder="{{ item.placeholder }}"
+                    {{ item.required }}>
+                </div>
+            {% endfor %}
+
+            <div id="eleNum">
+                {% for item in saldoEntrada %}
+                    <div class="cadastro-produto form-info {{ item.class }}">
+                        <label for="{{ item.label_for }}">{{ item.label_name }}</label>
+                        <input id="{{item.input_id}}" type="{{ item.type }}" name="{{ item.name }}" placeholder="{{ item.placeholder}}" {{ item.required }}>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-        <!------------   FIM   ------------>  
-        
+        <div class="p2">
+            <!-- CADASTRO PRODUTO 3 -->
+            <!-- TODO: CRIAR BOTÃO PARA REMOVER IMAGENS SELECIONADAS -->
+            <div id="cadastroProduto-3">
+                <fieldset>
+                    <legend>Importa Imagens</legend>
+                    <div id="cadastroOutputImagens">
+                        <!-- pré-visualizações das imagens aparecerão aqui -->
+                    </div>
+                    <input type="file" id="cadastroBntImage" name="image" multiple accept=".png, .jpg, .jpeg, .gif, .webp">
+                    <button type="button" onclick="document.getElementById('cadastroBntImage').click()">Selecionar Imagens</button>
+                </fieldset>
+            </div>
+        </div>
         <!-- SUBMETER -->
         <input class="submit" type="submit" value="Cadastrar">
-        <!------------   FIM   ------------>
     </form>
     <script src="../static/javascript/cadastroProduto.js"></script>
 </section>
-{% endblock conteudo %}
+{% endblock %}
