@@ -1,207 +1,237 @@
-# TODO: Organizar as importações, importando apenas as funcionalidades em uso.
-# 1. Revise todas as importações no arquivo.
-# 2. Identifique quais módulos, funções ou classes estão realmente sendo utilizados no código.
-# 3. Remova importações desnecessárias ou não utilizadas.
-# 4. Se possível, substitua importações globais (como `import modulo`) por importações específicas (como `from modulo import funcao`) para otimizar o código.
-# 5. Verifique se o código continua funcionando corretamente após a limpeza das importações.
-
-from datetime import datetime
 import os
 import json
 
+from .sistema import Database
+
+from flask import Request
+from datetime import datetime
+from werkzeug.datastructures import ImmutableMultiDict, FileStorage
+from utils import cadastro_produtos_config_template
+
 
 class cadastrarProduto:
-    def __init__(self, 
-                 produto: str,
-                 categoria: str,
-                 publico: str,
-                 saldo: int,
-                 tamanha: str,
-                 precoFornecedor: int,
-                 precoVenda: int,
-                 cor: str,
-                 fornecedor: str,
-                 descricao: str | None = None,
-                 codigoBarra: str | int | None = None,
-                 imagens: list | None = None):
-        """
-        Inicializa a classe cadastro com os dados do produto fornecidos
+    """
+    A classe recebe um objeto contendo dados do formulario e arquivos enviados,
+    esses dados serão utilizados para cadastrar um novo produto ao banco de dados.
+    
+    Parameters:
+        request (Request): Objeto contendo dados do formulário e arquivos enviados.
+        
+    Exemplo de uso::
 
-        Parameters:
-            produto (str): nome do produto
-            categoria (str): categoria do produto
-            publico (str): publico alvo
-            saldo (str): saldo de entrada
-            tamanha (str): tamanho da peça
-            descricao (str): descrição
-            cor (str): cor do produto
-            codigoBarra (str | int): código de barra
-            fornecedor (str): nome do fornecedor
-            precoFornecedor (int): preço de compra do fornecedor
-            precoVenda (int): preço de venda do produto
-            imagens (list[str]): lista de imagens do produto
-        """
+        # Importa a classe
+        from funcs.cadastro import cadastrarProduto
+        # Cria uma instância da classe
+        produto = cadastrarProduto(request=request)
+        # Cadastra o produto
+        produto.cadastrar()
+    """
+    
+    def __init__(self, request: Request):
+        # Recebe os dados do formulário
+        self.form: ImmutableMultiDict[str, str] = request.form
+        # Recebe os arquivos
+        self.files: ImmutableMultiDict[str, FileStorage] = request.files
+        # Define o nome da tabela
+        self.name_tabela: str = "produtos"
+        # Inicia a instância do banco de dados
+        self.db = Database()
+        
 
-        self.produto = produto
-        self.categoria = categoria
-        self.publico = publico
-        self.saldo = saldo
-        self.tamanha = tamanha
-        self.descricao = descricao
-        self.cor = cor
-        self.codigoBarra = codigoBarra
-        self.fornecedor = fornecedor
-        self.precoFornecedor = precoFornecedor
-        self.precoVenda = precoVenda
-        self.imagens = imagens
-
-    def gerar_identificacao(self) -> str:
+    def __definicao_de_tabela(self) -> list[dict]:
         """
-        Gera um código de identificação único para cada produto, considerando o nome do produto, 
-        público alvo, cor e o nome do fornecedor.
-
-        Returns:
-            str: Código de identificação único.
-        """
-        return f"{self.produto[:3]}{self.publico[:3]}-{self.cor[:3]}{self.fornecedor[:3]}".upper()
-
-    def calcular_lucro(self) -> int:
-        """
-        Calcula o lucro de um produto, subtraindo o preço de venda pelo preço de compra.
+        A função percorre através da função `cadastro_produtos_config_template()`.
+        Buscando os dados para a configuração da Template de cadastro.
         
         Returns:
-            int: Valor do lucro.
+            list[dict]: Uma lista contendo dicionários e cada dicionário com as seguintes chaves:
+                - `name` (str): Nome do campo no bando de dados (Ex: `precoVenda`).
+                - `type` (str): Tipo do campo no bando de dados (Ex: `TEXT`, `INTEGER`, `REAL` ).
+                - `required` (str): Indica se o campo é obrigatório (True) ou opcional (False).
+        
+        Exemplo de saída::
+        
+            [
+                {"name": "produto",     "type": "TEXT",     "required": "True"},
+                {"name": "descricao",   "type": "TEXT",     "required": "False"},
+                {"name": "saldo",       "type": "INTEGER",  "required": "True"},
+                {"name": "precoVenda",  "type": "REAL",     "required": "True"}
+            ]
         """
-        return int(self.precoVenda - self.precoFornecedor)
-    
-    def extrair_extensao_imagem(self, imagem: str) -> str:
+        return cadastro_produtos_config_template()["configuracao_para_sql"]
+
+
+    def __verificar_table(self, nome_tabela: str) -> None:
         """
-        Extrai a extensão de uma imagem.
+        Verifica se a tabela `nome_tabela` existe no banco de dados.
+        Caso não exista, cria uma nova tabela com o nome `nome_tabela` e a definição da mesma.
 
         Parameters:
-            imagem (str): Nome da imagem.
+            nome_tabela (str): Nome da tabela a ser verificada ou criada.
+        
+        Observações:
+        
+            - O campo `name` é definido como (produto, precoVenda, descricao e etc...).
+            - O campo `type` é definido como (`TEXT`, `REAL` ou `INTEGER`).
+            - O campo `NOT FULL` é obrigatório caso contrário ele é opcional.
+            - Os campos são definidos na função `__definicao_de_tabela()`.
+        
+        Example da template:
+        
+                id INTEGER PRIMARY KEY,
+                name type NOT NULL,
+                name type,
+        """
+        # Verifica se a tabela nao existe
+        if not self.db.verificar_tabela(nome_tabela):
+            # Busca a definição da tabela
+            __template: list[dict] = self.__definicao_de_tabela()
+            # Define a estrutura da tabela
+            __tabela: str = f"""
+                id INTEGER PRIMARY KEY,
+                {", ".join(f"{dicts['name']} {dicts['type']} {'NOT NULL' if dicts['required'] else ''}".strip() for dicts in __template)} 
+            """
+            # Cria a tabela no banco de dados passando o nome e a tabela
+            self.db.criar_tabela(nome_tabela=nome_tabela, string_template=__tabela)
+
+
+    def verificar_repositorio(self, name: str) -> str:g
+        """
+        Cria o repositorio de imagens caso não exista.
+
+        Parameters:
+            name (str): Nome do repositorio.
 
         Returns:
-            str: Extensão da imagem.
+            str: Caminho do repositorio criado.
         """
+        _path_: str = f"database/imagens/{name}"
+        # Verifica se o repositorio existe
+        if not os.path.exists(_path_):
+            # Cria o repositorio
+            os.makedirs(_path_, exist_ok=True)
+        else:
+            return _path_
+        return _path_
+
+
+    def extrair_extensao_imagem(self, imagem: str | None) -> str | None:
+        """
+        Extrai a extensão da imagem.
+        
+        Parameters:
+            imagem (str): Caminho da imagem.
+        
+        Returns:
+            str | None: Retorna a extensão da imagem ou None se a imagem for None.
+        """
+        if imagem is None:
+            return None
         return os.path.splitext(imagem)[1]
-  
-    # TODO: Transcrever esta função para o arquivo 'sistema.py'.
-    # 3. Colar a função no local apropriado dentro de 'sistema.py', 
-    #   mantendo a estrutura e a formatação correta.
-    # 4. Certificar-se de que todas as importações necessárias estão presentes no arquivo 'sistema.py'.
-    # 5. Testar a função no novo arquivo para garantir que ela funciona conforme o esperado.
-    def repositorio(self, tipo: str) -> str:
-        """
-        Retorna o caminho do repositório 'database' com o tipo de arquivo especificado.
 
-        Parameters:
-            tipo (str): Tipo do arquivo, exemplo 'imagens', 'produto'.
 
-        Returns:
-            str: Caminho do repositório.
+    def salvar_imagens(self, name_produto: str) -> str | None:
         """
-        repositorio_raiz = os.path.dirname(os.path.dirname(__file__)) # ../controle-de-estoque/
-        return os.path.join(repositorio_raiz, 'database', tipo)
-  
-    # TODO: Implementar funcionalidade para criar pastas usando o 'ID' do produto como nome da pasta.
-    # 1. Criar uma pasta com o nome baseado no 'ID' do produto, por exemplo, 'produto_<ID>/'.
-    # 2. Salvar os arquivos e dados relacionados ao produto dentro dessa pasta.
-    # 3. Verificar se uma pasta com o mesmo 'ID' já existe. Se sim, decidir se ela deve ser reutilizada ou atualizada.
-    def salvar_imagens(self, id: str) -> list | None:
-        """
-        Salva as imagens do produto no diretório 'database/img'
+        Salva as imagens do produto no diretório 'database/imagens' e
         Retorna uma lista com os caminhos das imagens.
 
         Parameters:
-            id (str): Código de identificação único do produto.
+            name_produto (str): Nome do produto para identificar a pasta no diretório.
 
         Returns:
-            list: Lista com os caminhos das imagens.
+            str | None: Retorna uma string JSON contendo uma lista com os caminhos das imagens
+            ou None se nenhuma imagem for salva.
             
-        Notes:
-            Se a lista de imagens for vazia, retorna uma lista vazio.
+        Exemplo de saída:
+        
+            '[
+            "imagens/NomeDoProduto/1.jpg", 
+            "imagens/NomeDoProduto/2.jpg", 
+            "imagens/NomeDoProduto/3.jpg"
+            ]'
         """
-        if self.imagens is None:
-            return [] # retorna uma lista vazia caso não tenha imagens
+        # Verifica se o formulário possui imagens
+        if self.files.getlist('imagens') is None:
+            return None 
         else:
-            path_list = [] # lista para armazenar os caminhos das imagens
-            len = 1 # contador para nomear as imagens
-            for imagem in self.imagens:
-                extensao = self.extrair_extensao_imagem(imagem.filename) # extensão da imagem
-                path = os.path.join(self.repositorio('imagens') ,f"{id}({len}){extensao}") # caminho da imagem
-                imagem.save(path) # salvar imagem
-                path_list.append(path) # adicionar caminho da imagem na lista
-                len += 1 # incrementar o contador
-            return path_list
+            # Verifica se a pasta existe
+            pasta: str = self.verificar_repositorio(name=name_produto)
+            # Busca a quantidade de imagens
+            count: int = len(x) if (x := os.listdir(pasta)) else 0
+            # lista para armazenar os caminhos das imagens
+            path_list: list = [] 
+            
+            for index, imagem in enumerate(self.files.getlist('imagens'), start=1):
+                # Extrai a extensão da imagem
+                extensao: str | None = self.extrair_extensao_imagem(imagem.filename)  
+                # Cria o caminho da imagem
+                path: str = os.path.join(pasta ,f"{count+index}{extensao}")
+                # Salva a imagem
+                imagem.save(path)
+                # Adiciona o caminho da imagem na lista
+                path_list.append(path)
+            
+            # Remove o prefixo 'database/' e substitui o separador '\\' por '/'
+            path_list: list = [i.replace('database/', '').replace('\\', '/') for i in path_list]    
+            return json.dumps(path_list)
+
+
+    def lista_dados_do_formulario(self, path_list: str | None) -> list[tuple]:
+        """
+        Transforma os dados do formulário em uma lista de tuplas, substituindo valores vazios por `None` e 
+        adiciona valores de data e hora atuais e calcula o lucro.
         
-    # TODO: Implementar verificação de dados:
-    # 1. Não sobrescrever valores no JSON se o campo correspondente no input estiver vazio, 
-    #    mas já houver um valor existente no JSON.
-    # 2. Verificar se os valores de entrada contêm números em ponto flutuante (float).
-    #    Se forem encontrados na chave 'Lucro', somar os valores em vez de sobrescrevê-los.
-    # 3. Caso o dado já exista no JSON, apenas atualizar a chave 'ultimaAlteracao' com a nova data.
-    # 4. Implementar suporte para variantes nas chaves 'cor' e 'tamanha', permitindo múltiplas entradas.
-    def mondar_dados(self) -> dict:
-        """
-        Monta um dicionário com os dados do produto, incluindo o código de identificação único, 
-        o lucro, a data de criação e a lista de imagens.
-
         Returns:
-            dict: Dicionário com os dados do produto.
-        """
-        id = self.gerar_identificacao() # gerar código de identificação único
-        lucro = self.calcular_lucro() # calcular o lucro do produto
-        data = datetime.now().strftime("%d/%m/%Y - %H:%M") # data de criação e última alteração
-        path_list = self.salvar_imagens(id) # salvar as imagens e retornar a lista de caminhos
+            list[tuple]: Lista contendo uma tupla com os dados do formulário.
         
-        dados = {
-            id: { # dicionário com os dados do produto
-                'nome': self.produto, # nome do produto
-                'categoria': self.categoria, # categoria do produto
-                'publico': self.publico, # público alvo do produto
-                'saldo': self.saldo, # saldo de entrada do produto
-                'tamanha': self.tamanha, # tamanho da peça do produto
-                'descricao': self.descricao, # descrição do produto
-                'cor': self.cor, # cor do produto
-                'codigoBarra': self.codigoBarra, # código de barra do produto
-                'fornecedor': self.fornecedor, # nome do fornecedor do produto
-                'precos': { # dicionário com os preços do produto
-                    'precoFornecedor': self.precoFornecedor, # preço de compra do fornecedor
-                    'precoVenda': self.precoVenda, # preço de venda do produto
-                    'lucro': lucro # lucro do produto
-                },
-                "dataCriacao": data, # data de criação do produto
-                "ultimaAlteracao": data, # data da última alteração do produto
-                'imagens': path_list # lista de imagens do produto
-            }
-        }
-        return dados
-    
-    # TODO: Alterar resposta se foi bem sucedido ou não.
-    def salvar(self) -> bool:
+        Exemplo de saída:
+        
+            [(value1, value2, value3, value4, value5)]
         """
-        Salva os dados do produto no arquivo 'database/produtos/estoque.json'.
+        # Filtra os dados do formulário e adiciona apena os valores na variável `__values`
+        __values: list[tuple] = [tuple(value if value else None for _, value in self.form.items())]
+        
+        for index, value in enumerate(__values):
+            # Adiciona lucro, data e hora atuais
+            _y:tuple = (
+                int(x[-2]) - int(x[-3]),  # type: ignore
+                datetime.now().strftime("%d/%m/%Y"),
+                datetime.now().strftime("%H:%M:%S"),
+                datetime.now().strftime("%d/%m/%Y"),
+                datetime.now().strftime("%H:%M:%S"),
+                path_list
+                )
+            # substitui os valores
+            __values[index] = value + _y
+        return __values
 
-        Este método abre o arquivo 'database/produtos/estoque.json' em modo de leitura e escrita,
-        carrega os dados no formato JSON, atualiza os dados do produto e salva no arquivo.
 
-        Returns:
-            bool: True se o salvamento foi bem sucedido, False caso contrário.
+    def __inserir_dados(self, dados: list[tuple]) -> None:
         """
-        with open('database/produtos/estoque.json', 'r+') as file:
-            try:
-                # Carrega os dados do arquivo no formato JSON
-                data = json.load(file)
-            except json.JSONDecodeError:
-                # Se o arquivo estiver vazio, cria um dicionário vazio
-                data = {}
-            # Atualiza os dados do produto
-            data.update(self.mondar_dados())
-            # Posiciona o ponteiro no início do arquivo
-            file.seek(0)
-            # Salva os dados no arquivo no formato JSON
-            json.dump(data, file, indent=4)
-            # Remove os caracteres excedentes do arquivo
-            file.truncate()
-        return True
+        Função percorre em buscar as configurações de definição da tabela `__definicao_de_tabela()` e
+        monta uma query para inserir os dados no banco de dados.
+
+        Parameters:
+            dados (list[tuple]): Lista contendo tuplas com os dados do formulário.
+        """
+        # Obtém a definição da tabela
+        config_templete: list[dict] = self.__definicao_de_tabela()
+        # Monta a query
+        query: str = f"""({", ".join(n["name"] for n in config_templete)}) VALUES ({", ".join("?" * len(config_templete))})"""
+        # Insere os dados no bando de dados
+        self.db.inserir_dados(
+            name_tabela=self.name_tabela,
+            template=query,
+            dados=dados
+            )
+
+
+    def cadastrar(self):
+        # Verifica se a tabela existe
+        self.__verificar_table(nome_tabela=self.name_tabela)
+        # Busca os dados
+        __pathList: str | None = self.salvar_imagens(name_produto=self.form['produto'])
+        # Adiciona dados essenciais ao formulário
+        __dadosList: list[tuple] = self.lista_dados_do_formulario(path_list=__pathList)
+        # Insere os dados
+        self.__inserir_dados(dados=__dadosList)
