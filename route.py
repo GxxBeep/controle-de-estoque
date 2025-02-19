@@ -71,10 +71,6 @@ def index() -> str:
 
 
 
-
-
-
-
 # 2. Eliminar código duplicado e melhorar eficiência onde possível.
 # 3. Implementar testes para garantir que a funcionalidade de cadastro funcione corretamente.
 @app.route("/cadastrar-produto/", methods=("GET", "POST"))
