@@ -245,6 +245,13 @@ section {
             padding-bottom: 10px;
         }
 
+        .cor {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cor,
         .codigoBarra,
         .fornecedor,
         .precoFornecedor,
