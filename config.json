@@ -1,3 +1,59 @@
 {
+    "navBar_config": [
+        {"rota": "cadastrar-produto", "icone": "bx-folder-plus", "texto": "Cadastrar"},
+        {"rota": "editar-produto disabled", "icone": "bxs-edit", "texto": "Editar"},
+        {"rota": "listar-produtos disabled", "icone": "bx-list-plus", "texto": "Estoque"},
+        {"rota": "info-produto disabled", "icone": "bx-info-circle", "texto": "Informação"}
+    ],
+
+    "cadastroProduto_config": {
+        "categoria_choice": [{"class": "categoria", "legend": "Categoria", "select_id": "cadastroProduto-categoria", "name": "categoria", "select_class": "cadastro-produto form-info categoria", "required": "required"}],
+
+        "publico": [
+            [{"class": "publico", "legend": "Público", "name": "publico", "input_id": "cadastroProduto-publico-fem", "value": "feminino", "required": "required"},
+            {"label_for": "cadastroProduto-publico-fem", "label_name": "feminino", "innerHTML": "Feminino"}],
+
+            [{"class": "publico", "legend": "Público", "name": "publico", "input_id": "cadastroProduto-publico-mas", "value": "masculino", "required": "required"},
+            {"label_for": "cadastroProduto-publico-mas", "label_name": "masculino", "innerHTML": "Masculino"}]
+        ],
+
+        "template": [
+            {"class": "produto", "label_for": "cadastroProduto-name", "label_name": "Nome do Produto", "input_id": "cadastroProduto-name","type": "text", "name": "produto", "placeholder": "Ex.: Camisa branca tamanho G HIGH", "required": "required"},
+            {"class": "tamanho", "label_for": "tamanhoProduto", "label_name": "Tamanho", "input_id": "tamanhoProduto" ,"type": "text", "name": "tamanho", "placeholder": "Ex.: G", "required": "required"},
+            {"class": "descricao", "label_for": "descricaoProduto", "label_name": "Descrição", "input_id": "descricaoProduto" ,"type": "text", "name": "descricao", "placeholder": "Adicione uma descrição", "required": ""},
+            {"class": "cor", "label_for": "cor", "label_name": "Cor","input_id": "produtoCor" , "type": "text", "name": "cor", "placeholder": "Ex.: Preta", "required": "required"},
+            {"class": "codigoBarra", "label_for": "codigoBarra", "label_name": "Código de Barras", "input_id": "codigoBarra" ,"type": "text", "name": "codigoBarra", "placeholder": "Ex.: 7891024117606 (Apenas números)", "required": ""},
+            {"class": "fornecedor", "label_for": "fornecedor", "label_name": "Fornecedor", "input_id": "fornecedor" ,"type": "text", "name": "fornecedor", "placeholder": "Ex.: HIGH", "required": "required"}
+        ],
+        
+        "saldoEntrada": [
+            {"class": "saldo", "label_for": "cadastroProduto-saldo", "label_name": "Saldo de Entrada","input_id": "cadastroProduto-saldo" ,"type": "number", "name": "saldo", "placeholder": "Ex.: 100", "required": "required"},
+            {"class": "precoFornecedor", "label_for": "precoFornecedor", "label_name": "Preço do fornecedor (R$)", "input_id": "precoFornecedor" ,"type": "number", "name": "precoFornecedor", "placeholder": "Informe o preço do fornecedor", "required": "required"},
+            {"class": "precoVenda", "label_for": "precoVenda", "label_name": "Preço de venda (R$)", "input_id": "precoVenda" ,"type": "number", "name": "precoVenda", "placeholder": "Informe o valor de venda", "required": "required"}
+        ],
+
+        "categoria_options": ["Blusas", "Calças", "Camisas", "Casacos", "Jaquetas", "Macacões", "Saias", "Sapatos", "Shorts", "Vestidos"],
+        
+        "configuracao_para_sql": [
+            {"name": "categoria",                  "type": "TEXT",         "required": true},
+            {"name": "publico",                    "type": "TEXT",         "required": true},
+            {"name": "produto",                    "type": "TEXT",         "required": true},
+            {"name": "tamanho",                    "type": "TEXT",         "required": true},
+            {"name": "descricao",                  "type": "TEXT",         "required": false},
+            {"name": "cor",                        "type": "TEXT",         "required": true},
+            {"name": "codigoBarra",                "type": "TEXT",         "required": false},
+            {"name": "fornecedor",                 "type": "TEXT",         "required": true},
+            {"name": "saldo",                      "type": "INTEGER",      "required": true},
+            {"name": "precoFornecedor",            "type": "REAL",         "required": true},
+            {"name": "precoVenda",                 "type": "REAL",         "required": true},
+            {"name": "lucroVenda",                 "type": "REAL",         "required": true},
+            {"name": "dataCriacao",                "type": "TEXT",         "required": true},
+            {"name": "horaCriacao",                "type": "TEXT",         "required": true},
+            {"name": "dataUltimaAlteracao",        "type": "TEXT",         "required": true},
+            {"name": "horaUltimaAlteracao",        "type": "TEXT",         "required": true},
+            {"name": "imagens",                    "type": "TEXT",         "required": false}
+        ]
+    }
+
 
 }
