@@ -2,146 +2,254 @@
 # 1. Revise todas as importações no arquivo.
 # 2. Identifique quais módulos, funções ou classes estão realmente sendo utilizados no código.
 # 3. Remova importações desnecessárias ou não utilizadas.
-# 4. Se possível, substitua importações globais (como `import modulo`) por importações específicas (como `from modulo import funcao`) para otimizar o código.
+# 4. Se possível, substitua importações globais (como `import modulo`) por importações específicas (como `from modulo import função`) para otimizar o código.
 # 5. Verifique se o código continua funcionando corretamente após a limpeza das importações.
 
-from flask import Flask, render_template, request, flash, redirect, url_for
-from flask.wrappers import Response
-from dotenv import load_dotenv
-import os
+
+from flask import Flask, render_template, request
 
 from funcs.cadastro import cadastrarProduto
+from funcs.editor import editarProduto
 
-
-
+from utils import menu_bar, cadastro_produtos_config_template
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('KEY')
 
 
-# TODO: Implementar configuração que iriar carregar configurações do json antes de iniciar o servidor
-def carregar_configuracoes() -> list:
-    # Dados temporários para testes
-    categoria: list[str] = ['Blusas', 'Calças', 'Camisas',
-                        'Casacos', 'Jaquetas', 'Macacões',
-                        'Saias', 'Sapatos', 'Shorts', 'Vestidos']
-    
-    return categoria
-
-# TODO: index() Pendente a configuração e gerar documentação 
-@app.route('/')
+@app.route("/")
 def index() -> str:
-    return render_template('index.html')
+    """
+    Retorna a página principal do sistema de estoque.
 
-# TODO: Refatorar o Cadastro de Produtos
-# 1. Validar se os campos obrigatórios estão preenchidos e se os dados são válidos antes de criar o produto.
+    Returns:
+        str: HTML renderizado do template 'index.html'.
+
+    Notes:
+        A barra de navegação é gerada dinamicamente a partir de 'menu_bar()'.
+    """
+    return render_template("index.html", navBar=menu_bar())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 2. Eliminar código duplicado e melhorar eficiência onde possível.
 # 3. Implementar testes para garantir que a funcionalidade de cadastro funcione corretamente.
-@app.route('/cadastrar-produto/', methods=('GET', 'POST'))
+@app.route("/cadastrar-produto/", methods=("GET", "POST"))
 def cadastrar_produto() -> str:
-    """Rota para cadastrar um novo produto.
-    
-    Se o método for GET, retorna o template de cadastro de produtos.
-    
-    Se o método for POST, cadastra um novo produto com as informações
-    recebidas no formulário e salva no banco de dados. Se o cadastro for
-    bem-sucedido, retorna para a URL atual com uma mensagem de sucesso
-    e um redirect.
-    
-    Return:
-        Template de cadastro de produtos ou redirect para a URL atual
     """
-    if request.method == 'POST':
+    Rota para cadastrar novo produto ao banco de dados.
+
+    Se o método for GET, retorna o template de cadastro de produtos.
+
+    Se o método for POST, cadastra um novo produto com as informações
+    recebidas no formulário e salva no banco de dados.
+
+    Return:
+        HTML renderizado do Template de cadastro de produtos.
+        
+    Observações:
+    
+        - 'menu-nav/cadastro.html' é o template
+        - 'template', 'categoria' e 'saldoEntrada' são alimentados dinamicamente a partir de 'cadastro_produtos_config_template()'.
+        - A barra de navegação é gerada dinamicamente a partir de 'menu_bar()'.
+    """
+    if request.method == "POST":
         # Se o método for POST, cadastra um novo produto,
         # com as informações recebidas no formulário
-        produto = cadastrarProduto(
-            produto=request.form['produtoNome'],
-            categoria=request.form['categoria'],
-            publico=request.form['publico'],
-            saldo=int(request.form['saldoentrada']),
-            tamanha=request.form['tamanhopeca'],
-            descricao=request.form['descricao'],
-            codigoBarra=request.form['codigoBarra'],
-            fornecedor=request.form['fornecedor'],
-            precoFornecedor=int(request.form['precoFornecedor']),
-            precoVenda=int(request.form['precoVenda']),
-            cor=request.form['produtoCor'],
-            imagens=request.files.getlist('imagens')
-            )
-        # produto.salvar() salva os dados do novo produto
-        if produto.salvar():
-            flash('Cadastrado com sucesso!') # Mensagem de sucesso
-            return redirect(request.url)  # retorna para a URL atual
-    categoria = carregar_configuracoes() # Carrega a lista de categorias
-    # Retorna o template de cadastro de produtos
-    return render_template('menu-nav/cadastro.html', categoria=categoria)
+        produto = cadastrarProduto(request=request)
+        produto.cadastrar()
+        
+    # Retorna o template de cadastro de produtos se o método for GET
+    return render_template(
+        "menu-nav/cadastro.html",
+        template=cadastro_produtos_config_template()["template"],
+        categoria=cadastro_produtos_config_template()["categoria_options"],
+        saldoEntrada=cadastro_produtos_config_template()["saldoEntrada"],
+        navBar=menu_bar(),
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # TODO: editar_produto()Pendente a configuração
-@app.route('/editar-produto')
-def editar_produto() -> str:
+@app.route("/editar-produto", methods=("GET", "POST"))
+def editar_produto():
 
-    template = render_template('menu-nav/editor.html')
+    if request.method == "POST":
+        if request.content_type == "text/plain":
+
+            print()
+            print(request.data.decode("utf-8"))
+            print()
+
+            produto = editarProduto(request.data.decode("utf-8"))
+            return produto.dados()
+
+    template = render_template("menu-nav/editor.html")
 
     return template
+
+
+
 
 # TODO: listar_produtos() Pendente a configuração
-@app.route('/listar-produtos')
+@app.route("/listar-produtos")
 def listar_produtos() -> str:
-    template = render_template('menu-nav/list.html')
+    template = render_template("menu-nav/list.html")
     return template
 
+
 # TODO: info_produto() Pendente a configuração
-@app.route('/info-produto')
+@app.route("/info-produto")
 def info_produto() -> str:
     # TODO: Obter dicionário com uma função GET
     dictionary: dict[str, str] = {
         # produto 1
-        'titulo': 'Caneta Azul',
-        'categoria': 'Azul Caneta',
-        'publico': 'Feminino',
-        'saldo': '10',
-        'tamanho': 'GG',
-        'descricao': 'Um texto qualquer.',
+        "titulo": "Caneta Azul",
+        "categoria": "Azul Caneta",
+        "publico": "Feminino",
+        "saldo": "10",
+        "tamanho": "GG",
+        "descricao": "Um texto qualquer.",
         # produto 2
-        'codigo': '1234567890',
-        'fornecedor': 'Google Ltda',
-        'precofornecedor': '1000.00',
-        'precovenda': '10.00'
+        "codigo": "1234567890",
+        "fornecedor": "Google Ltda",
+        "precofornecedor": "1000.00",
+        "precovenda": "10.00",
     }
-    imagens: list[str] = ["/static/img/image.jpg",
-                    "/static/img/image.jpg",
-                    "/static/img/image.jpg",
-                    "/static/img/image.jpg",
-                    "/static/img/image.jpg"]
+    imagens: list[str] = [
+        "/static/img/image.jpg",
+        "/static/img/image.jpg",
+        "/static/img/image.jpg",
+        "/static/img/image.jpg",
+        "/static/img/image.jpg",
+    ]
     template: str = render_template(
-        'menu-nav/info.html',
-        dictionary=dictionary,
-        imagens=imagens)
+        "menu-nav/info.html", dictionary=dictionary, imagens=imagens
+    )
 
     return template
 
+
 # TODO: login() Pendente a configuração
-@app.route('/login')
+@app.route("/login")
 def login() -> str:
-    return render_template('login.html')
+    return render_template("login.html")
+
 
 # TODO: manutencao() Pendente a configuração
-@app.route('/manutencao')
+@app.route("/manutencao")
 def manutencao() -> str:
     title = "Informações do Produto"
     className = 'ClassName = "op-info-produto"'
     description = "Em manutenção..."
 
     template = render_template(
-        'menu-nav/manutencao.html',
+        "menu-nav/manutencao.html",
         title=title,
         className=className,
-        description=description
+        description=description,
     )
 
     return template
 
 
-if __name__ == '__main__':
-    load_dotenv()
+if __name__ == "__main__":
     app.run(debug=True)
